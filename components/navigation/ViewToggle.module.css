@@ -1,0 +1,23 @@
+.toggle {
+  display: flex;
+  gap: var(--space-12);
+}
+
+.toggle button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--color-icon-default);
+}
+
+.toggle button:hover {
+  opacity: 0.7;
+}
+
+.toggle button.active {
+  color: var(--color-icon-active);
+}

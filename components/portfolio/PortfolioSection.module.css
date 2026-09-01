@@ -1,0 +1,10 @@
+.section {
+  margin-top: var(--space-64);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-24);
+}

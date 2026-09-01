@@ -1,0 +1,20 @@
+.nav {
+  display: flex;
+  gap: var(--space-16);
+}
+
+.button {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+}
+
+.button:hover {
+  opacity: 0.7;
+}
+
+.active {
+  color: var(--color-text-primary);
+}
