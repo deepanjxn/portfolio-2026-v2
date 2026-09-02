@@ -1,0 +1,44 @@
+.window {
+  /* Central tuning knobs for the cursor media offset */
+  --cursor-media-offset-x: 24px;
+  --cursor-media-offset-y: 24px;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 164px;
+  overflow: hidden;
+  border-radius: 0;
+  background: var(--color-surface-dark);
+  opacity: 0;
+  transition: opacity 200ms ease;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.window:not(.hidden) {
+  opacity: 1;
+}
+
+.media {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .window {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .window {
+    display: none;
+  }
+}

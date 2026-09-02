@@ -20,7 +20,7 @@ export default function CategoryNav({ active, onChange }: CategoryNavProps) {
         <button
           key={category}
           type="button"
-          className={`type-t1 ${styles.button} ${
+          className={`type-t1 ${styles.button} ${styles[category]} ${
             active === category ? styles.active : ""
           }`}
           aria-pressed={active === category}

@@ -11,6 +11,7 @@
   --color-icon-default: #e0e0e0;
 
   /* Spacing tokens */
+  --space-8: 8px;
   --space-12: 12px;
   --space-16: 16px;
   --space-24: 24px;
@@ -21,6 +22,10 @@
 
   /* Radius tokens */
   --radius-card: 16px;
+
+  /* Page geometry tokens */
+  --page-gutter: 24px;
+  --content-width-large: 1392px;
 
   /* Typography tokens — desktop */
   --text-h1-size: 24px;
@@ -40,6 +45,7 @@
 /* Typography tokens — mobile */
 @media (max-width: 767px) {
   :root {
+    --page-gutter: 16px;
     --text-h1-size: 20px;
     --text-h1-line-height: 28px;
     --text-p1-size: 14px;
@@ -47,10 +53,36 @@
   }
 }
 
+/* Reserve scrollbar space globally so all pages share the same
+   effective layout width regardless of scrollbar presence.
+   Horizontal clipping is applied at the root only: overflow-x on body
+   would compute overflow-y to auto and make body a scroll container,
+   which breaks position: sticky on descendants. */
+html {
+  scrollbar-gutter: stable;
+  overflow-x: hidden;
+}
+
+/* Desktop only: hide the visible scrollbar without changing layout.
+   Chrome/Safari/Edge honor ::-webkit-scrollbar while scrollbar-gutter
+   keeps reserving its layout space, so page geometry is unchanged.
+   Firefox does not support that pseudo-element, so fall back to
+   scrollbar-width: none there (scrollbar space is freed, not reserved). */
+@media (pointer: fine) {
+  html::-webkit-scrollbar {
+    display: none;
+  }
+
+  @supports not selector(html::-webkit-scrollbar) {
+    html {
+      scrollbar-width: none;
+    }
+  }
+}
+
 html,
 body {
   max-width: 100vw;
-  overflow-x: hidden;
 }
 
 body {
@@ -90,18 +122,25 @@ button {
   outline-offset: 4px;
 }
 
-/* Page geometry: 24px gutters, constrained to 1392px with 264px gutters at 1920px+ */
+/* Page geometry: shared container for all pages */
+/* 24px gutters until content reaches the large-screen cap, then centered */
 .container {
-  width: 100%;
-  padding-inline: var(--space-24);
+  width: calc(100% - 2 * var(--page-gutter));
+  max-width: var(--content-width-large);
+  margin-inline: auto;
 }
 
-@media (min-width: 1920px) {
-  .container {
-    max-width: 1392px;
-    margin-inline: auto;
-    padding-inline: 0;
-  }
+/* Dark theme scope: maps shared tokens onto the dark surface palette */
+.theme-dark {
+  --color-surface-background: var(--color-surface-dark);
+  --color-text-primary: var(--color-text-dark-primary);
+  --color-text-secondary: var(--color-text-dark-secondary);
+  background: var(--color-surface-dark);
+  color: var(--color-text-dark-primary);
+}
+
+body:has(.theme-dark) {
+  background: var(--color-surface-dark);
 }
 
 /* Typography */

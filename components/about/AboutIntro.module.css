@@ -1,0 +1,15 @@
+.intro {
+  margin-top: var(--space-64);
+  max-width: 780px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
+}
+
+.paragraph {
+  color: inherit;
+}
+
+.muted {
+  color: var(--color-text-secondary);
+}
