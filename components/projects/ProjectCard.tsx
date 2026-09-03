@@ -24,7 +24,9 @@ export default function ProjectCard({
           : ({ "--reveal-delay": `${revealDelayMs}ms` } as CSSProperties)
       }
     >
-      <ProjectMedia project={project} />
+      <div className={styles.hoverSurface}>
+        <ProjectMedia project={project} />
+      </div>
     </article>
   );
 }
