@@ -11,7 +11,7 @@ export default function ProjectMedia({ project }: { project: Project }) {
 
   if (project.mediaType === "image" && project.thumbnail) {
     return (
-      <div className={styles.media} style={ratioStyle}>
+      <div className={styles.media} data-radius-surface style={ratioStyle}>
         <Image
           src={project.thumbnail}
           alt={project.alt ?? project.title}
@@ -25,7 +25,7 @@ export default function ProjectMedia({ project }: { project: Project }) {
 
   if (project.mediaType === "video" && project.videoSrc) {
     return (
-      <div className={styles.media} style={ratioStyle}>
+      <div className={styles.media} data-radius-surface style={ratioStyle}>
         <video
           className={styles.video}
           poster={project.poster}
@@ -41,5 +41,12 @@ export default function ProjectMedia({ project }: { project: Project }) {
     );
   }
 
-  return <div className={styles.media} style={ratioStyle} aria-hidden="true" />;
+  return (
+    <div
+      className={styles.media}
+      data-radius-surface
+      style={ratioStyle}
+      aria-hidden="true"
+    />
+  );
 }

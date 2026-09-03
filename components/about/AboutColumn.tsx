@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import type { AboutListColumn } from "@/data/about";
 import styles from "./AboutColumn.module.css";
+import columnsStyles from "./AboutColumns.module.css";
 
 interface AboutColumnProps {
   column: AboutListColumn;
@@ -10,7 +11,9 @@ interface AboutColumnProps {
 export default function AboutColumn({ column, revealDelayMs }: AboutColumnProps) {
   return (
     <section
-      className={`${styles.column} ${styles[column.id]}`}
+      /* Ordering rules for the columns (mobile reorder lives in
+         AboutColumns.module.css) are defined there, not in this module. */
+      className={columnsStyles[column.id]}
       data-reveal
       style={
         revealDelayMs === undefined

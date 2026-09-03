@@ -16,6 +16,7 @@ export default function ProjectCard({
     <article
       className={styles.card}
       data-hover-sound
+      data-project-id={project.id}
       data-reveal="media"
       style={
         revealDelayMs === undefined
