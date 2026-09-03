@@ -1,4 +1,5 @@
 import { introParagraphs } from "@/data/about";
+import type { CSSProperties } from "react";
 import styles from "./AboutIntro.module.css";
 
 export default function AboutIntro() {
@@ -24,16 +25,19 @@ export default function AboutIntro() {
         });
 
         const className = `type-h1 ${styles.paragraph}`;
+        const revealStyle = {
+          "--reveal-delay": `${(paragraphIndex + 1) * 100}ms`,
+        } as CSSProperties;
 
         if (paragraphIndex === 0) {
           return (
-            <h1 key={paragraphIndex} className={className}>
+            <h1 key={paragraphIndex} className={className} data-reveal style={revealStyle}>
               {content}
             </h1>
           );
         }
         return (
-          <p key={paragraphIndex} className={className}>
+          <p key={paragraphIndex} className={className} data-reveal style={revealStyle}>
             {content}
           </p>
         );

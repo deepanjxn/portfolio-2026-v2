@@ -9,20 +9,20 @@ export default function Header() {
   const isAbout = pathname === "/about";
 
   return (
-    <header className={styles.header}>
+    <header className={styles.header} data-reveal>
       <nav className={`${styles.nav} container`} aria-label="Primary">
-        <Link className={`${styles.brand} type-t1`} href="/">
+        <Link className={`${styles.brand} type-h3`} href="/">
           D-S
         </Link>
         <div className={styles.links}>
           <Link
-            className={styles.link}
+            className={`${styles.link} type-h3`}
             href="/about"
             aria-current={isAbout ? "page" : undefined}
           >
             About
           </Link>
-          <a className={styles.link} href="#">
+          <a className={`${styles.link} type-h3`} href="#">
             Email
           </a>
         </div>

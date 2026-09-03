@@ -185,3 +185,37 @@ body:has(.theme-dark) {
   font-size: var(--text-p2-size);
   line-height: var(--text-p2-line-height);
 }
+
+/* Page-load entrance reveal.
+   Elements marked data-reveal rise 8px into place with a fade while the
+   body carries .reveal-entering (present in SSR markup on hard loads and
+   re-applied by PageReveal before each client-side route paint). The
+   class is dropped once the longest staggered animation has settled so
+   later re-renders (category filtering, view toggling) never replay it.
+   Per-element delay comes from the --reveal-delay custom property;
+   data-reveal="media" marks the slower media-card variant. */
+@keyframes reveal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal-entering [data-reveal] {
+  animation: reveal-rise 800ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal-entering [data-reveal="media"] {
+  animation-duration: 950ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-entering [data-reveal] {
+    animation: none;
+  }
+}

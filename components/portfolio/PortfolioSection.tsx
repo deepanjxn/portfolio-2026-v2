@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import type { CSSProperties } from "react";
 import type { Project, ProjectCategory } from "@/data/projects";
 import CategoryNav from "@/components/navigation/CategoryNav";
 import ViewToggle from "@/components/navigation/ViewToggle";
@@ -23,7 +24,11 @@ export default function PortfolioSection({ projects }: PortfolioSectionProps) {
 
   return (
     <section aria-label="Portfolio" className={styles.section}>
-      <div className={styles.controls}>
+      <div
+        className={styles.controls}
+        data-reveal
+        style={{ "--reveal-delay": "300ms" } as CSSProperties}
+      >
         <CategoryNav active={category} onChange={setCategory} />
         <ViewToggle view={view} onChange={setView} />
       </div>
