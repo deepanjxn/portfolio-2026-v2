@@ -9,6 +9,7 @@
   --color-text-dark-secondary: rgba(255, 255, 255, 0.5);
   --color-icon-active: #8b8b8b;
   --color-icon-default: #e0e0e0;
+  --color-accent-blue: #007aff;
 
   /* Spacing tokens */
   --space-8: 8px;

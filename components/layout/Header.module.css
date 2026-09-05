@@ -18,6 +18,8 @@
   display: inline-block;
 }
 
-.link:hover {
-  opacity: 0.7;
+@media (hover: hover) and (pointer: fine) {
+  .link:hover {
+    opacity: 0.7;
+  }
 }

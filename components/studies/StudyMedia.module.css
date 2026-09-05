@@ -1,0 +1,28 @@
+/* Absolute fill inside the editorial media box (16:10, 16px radius,
+   overflow hidden on the box). Every asset kind — image, video, embed —
+   shares the same geometry so the panel layout never changes between
+   placeholder and asset. */
+.fill {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.asset {
+  object-fit: cover;
+}
+
+.embed {
+  border: 0;
+}
+
+/* Transparent pointer-capturing layer above the Vimeo iframe. A
+   cross-origin iframe never reports hover to the parent document, so
+   without it the media box could not scale on hover over the video.
+   The embed is ambient (muted autoplay loop, controls off), so no
+   pointer interaction is lost. */
+.vimeoOverlay {
+  position: absolute;
+  inset: 0;
+}

@@ -24,8 +24,8 @@ export const CATEGORY_LABELS: Record<ProjectCategory, string> = {
 export const projects: Project[] = [
   {
     id: "p01",
-    slug: "fintech-onboarding",
-    title: "Redesigning fintech onboarding",
+    slug: "livestroke",
+    title: "LiveStroke",
     category: "studies",
     mediaType: "image",
   },

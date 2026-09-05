@@ -24,8 +24,10 @@
   gap: var(--space-24);
 }
 
-.link:hover {
-  opacity: 0.7;
+@media (hover: hover) and (pointer: fine) {
+  .link:hover {
+    opacity: 0.7;
+  }
 }
 
 @media (max-width: 767px) {

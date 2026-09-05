@@ -429,6 +429,11 @@ export default function ProjectGrid({ projects, view }: ProjectGridProps) {
         <ProjectCard
           key={project.id}
           project={project}
+          href={
+            project.category === "studies"
+              ? `/studies/${project.slug}`
+              : undefined
+          }
           revealDelayMs={mediaDelayFor(index, view)}
         />
       ))}

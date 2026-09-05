@@ -1,0 +1,167 @@
+.main {
+  margin-top: 164px;
+  /* Closing gap mirrors the 164px opening gap: the global footer
+     already reserves 120px of top padding for itself, so the main
+     content adds the remaining 44px below the last editorial block. */
+  margin-bottom: calc(164px - var(--space-120));
+}
+
+@media (max-width: 767px) {
+  .main {
+    margin-top: var(--space-64);
+  }
+}
+
+/* Editorial column, centered inside the page.
+   Desktop: the column is FIXED at 912px and centered — 1440px viewport
+   gives 264px of whitespace on each side, 1920px gives 504px, and wider
+   viewports grow only the surrounding whitespace. The column never grows
+   with the viewport. The global header and footer keep following the
+   shared large-screen container (1392px cap).
+   Tablet/mobile inherit the shared page-container architecture: below
+   the cap the column is gutter-relative (mobile 16px / tablet 24px
+   gutters), exactly like .container, so no new breakpoint is needed. */
+.editorial {
+  width: calc(100% - 2 * var(--page-gutter));
+  max-width: 912px;
+  margin-inline: auto;
+}
+
+/* Study header row: subtitle (left) + year (right edge of the editorial
+   column) share one line, with an 8px gap from the title above. On
+   mobile the year drops below the subtitle with a 48px gap instead. */
+.subtitleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  column-gap: var(--space-24);
+  margin-top: var(--space-8);
+}
+
+.subtitle {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: var(--color-text-secondary);
+}
+
+.date {
+  flex: none;
+  margin-left: auto;
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 767px) {
+  .subtitleRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* The base rule's margin-left: auto (kept, not reset to 0) pushes the
+     date to the right edge of the column; only the vertical 48px drop
+     below the subtitle changes on mobile. */
+  .date {
+    margin-top: 48px;
+  }
+}
+
+/* Major editorial section rhythm: 120px desktop, 88px mobile. */
+.body {
+  margin-top: var(--space-120);
+}
+
+.body > * + * {
+  margin-top: var(--space-120);
+}
+
+@media (max-width: 767px) {
+  .body {
+    margin-top: 88px;
+  }
+
+  .body > * + * {
+    margin-top: 88px;
+  }
+}
+
+/* Case-study copy: one or more P1 paragraphs. Paragraphs inside the
+   same scene are close (32px); the 120px/88px rhythm applies between
+   scenes and their media, never inside a text block. */
+.text > * + * {
+  margin-top: var(--space-32);
+}
+
+/* Optional action link on its own line below a text block's paragraphs
+   (vertical rhythm comes from .text > * + * above). No underline and no
+   hover color change — the global SoundEffects listener already plays
+   the hover/click sounds for every real <a>. */
+.textLink {
+  display: inline-block;
+  color: var(--color-accent-blue);
+}
+
+/* Editorial media boxes: full editorial width, 16:10, clipped to the
+   shared --radius-card radius (12px) by overflow hidden. The box itself
+   carries no paint: the nested .hoverSurface does, so when it scales
+   down on hover the panel reveals page background around it exactly
+   like the homepage cards. aspect-ratio reserves the space up front,
+   so lazy-loading real images later cannot shift layout. */
+.media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+/* Hover visual surface, mirroring the homepage ProjectCard pattern: the
+   box owns geometry and clipping, this wrapper owns the surface fill
+   and the subtle scale(0.98) hover, so nothing ever spills outside the
+   rounded box and the two concerns never fight. The absolute fill keeps
+   the resting layout pixel-identical to a plain background panel. */
+.hoverSurface {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: var(--color-surface-card);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hoverSurface {
+    transform-origin: center center;
+    transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .media:hover .hoverSurface {
+    transform: scale(0.98);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: reduce) {
+  .hoverSurface,
+  .media:hover .hoverSurface {
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Media cluster — one grouped visual made of several panels. Items sit
+   side by side when width allows and stack below; the internal gap is
+   exactly 16px (--space-16) on BOTH axes at every breakpoint (horizontal
+   rows, vertical stacks, and wrapped layouts alike). This 16px
+   cluster-internal spacing is separate from the 120px/88px major
+   section rhythm between clusters and other sections. */
+.cluster {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  row-gap: var(--space-16);
+  column-gap: var(--space-16);
+}
+
+/* Vertical-group variant: every item spans the full editorial width,
+   one under the next, still exactly 16px apart (the base row-gap). Used
+   when a grouped visual must read top-to-bottom rather than wrap into
+   columns. */
+.cluster.stack {
+  grid-template-columns: minmax(0, 1fr);
+}

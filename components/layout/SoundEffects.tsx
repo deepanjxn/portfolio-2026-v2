@@ -7,14 +7,20 @@ import { useEffect, useRef } from "react";
    data-hover-sound (project cards), and a distinct click-enter sound
    when a hyperlink or button is clicked. One delegated
    pointerover/click listener pair covers every target on the site,
-   including targets added later. The browser only allows audio playback
-   after a user gesture, so the first pointerdown anywhere silently warms
-   both Audio elements up (volume 0) — after that, hovers/clicks can
-   sound. */
+   including targets added later. Hover sound is restricted to real
+   hover-capable fine-pointer environments (desktop); on coarse-pointer
+   / non-hovering devices (tablet, mobile) only the explicit click/tap
+   sound exists. The browser only allows audio playback after a user
+   gesture, so the first pointerdown anywhere silently warms both Audio
+   elements up (volume 0) — after that, hovers/clicks can sound. */
 const HOVER_SOUND_SRC = "/sfx/click-sound.m4a";
 const ENTER_SOUND_SRC = "/sfx/click-enter.m4a";
 const HOVER_TARGET_SELECTOR = 'a[href], button:not(:disabled), [data-hover-sound]';
 const CLICK_TARGET_SELECTOR = "a[href], button:not(:disabled)";
+/* Hover sounds exist only where hover is a real, fine-pointer
+   capability (desktop mouse). Coarse-pointer / non-hovering devices
+   (tablet, mobile) must react to an explicit click or tap only. */
+const FINE_POINTER_QUERY = "(hover: hover) and (pointer: fine)";
 
 export default function SoundEffects() {
   const lastTargetRef = useRef<Element | null>(null);
@@ -23,6 +29,7 @@ export default function SoundEffects() {
   useEffect(() => {
     let hoverAudio: HTMLAudioElement | null = null;
     let enterAudio: HTMLAudioElement | null = null;
+    const finePointer = window.matchMedia(FINE_POINTER_QUERY);
 
     const getHoverAudio = () => {
       if (!hoverAudio) {
@@ -42,6 +49,10 @@ export default function SoundEffects() {
 
     const handlePointerOver = (event: PointerEvent) => {
       if (event.pointerType && event.pointerType !== "mouse") return;
+      /* No hover sound without an actual hover-capable fine pointer —
+         covers touch/coarse devices even when they synthesize mouse-ish
+         pointer events. */
+      if (!finePointer.matches) return;
       /* After a click navigates, the freshly mounted page can re-fire
          pointerover on the link under the stationary cursor; skip the
          hover sound briefly so only the enter sound plays on click. */
