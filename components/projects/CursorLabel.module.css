@@ -1,0 +1,36 @@
+/* Cursor pill: fixed, pointer-transparent, never affects layout or
+   leaves a card's clipping context. Geometry follows the LiveStroke
+   spec — 32px tall (6px vertical padding each side around the H3's
+   20px line), 18px horizontal padding, 16px radius — while the width
+   stays content-driven, so other Study titles size naturally. Position
+   is written by the rAF loop in the component; the transition here
+   only animates the pill's own fade/scale entrance. */
+.pill {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 6px 18px;
+  border-radius: 0 16px 16px 14px;
+  opacity: 0;
+  transform: scale(0.92);
+  transform-origin: top left;
+  will-change: transform, opacity;
+  transition: opacity 160ms ease-out, transform 160ms ease-out;
+}
+
+.label {
+  color: #fff;
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pill {
+    transition: none;
+  }
+}

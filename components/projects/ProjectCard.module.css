@@ -4,10 +4,13 @@
 }
 
 /* Dedicated hover visual surface, nested between the FLIP element
-   (article) and the media surface. The FLIP transform and its radius
-   compensation live on the article / .media; this wrapper owns only the
-   subtle hover scale, so the two transforms compose through nesting
-   instead of overwriting each other. */
+   (article) and the media frame. The FLIP transform lives on the
+   article and the hover scale lives HERE as the single card-hover
+   transform — the inner .inset / media elements carry no transforms of
+   their own, so the whole card moves as one unit. The entrance reveal
+   animation transforms the article too; gating on the body class keeps
+   the two from compounding into a double-scale during the first
+   seconds after a page load. */
 .hoverSurface {
   width: 100%;
 }
@@ -18,14 +21,17 @@
     transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .card:hover .hoverSurface {
+  /* Only while the reveal is not running (body drops .reveal-entering
+     once the entrance animations settle). :global() keeps the body
+     class out of CSS-module hashing. */
+  body:not(:global(.reveal-entering)) .card:hover .hoverSurface {
     transform: scale(0.98);
   }
 }
 
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: reduce) {
   .hoverSurface,
-  .card:hover .hoverSurface {
+  body:not(:global(.reveal-entering)) .card:hover .hoverSurface {
     transform: none;
     transition: none;
   }

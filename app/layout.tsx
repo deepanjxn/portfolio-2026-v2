@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import PageReveal from "@/components/layout/PageReveal";
 import SoundEffects from "@/components/layout/SoundEffects";
+import CursorLabel from "@/components/projects/CursorLabel";
 import "./globals.css";
 
 const geist = Geist({
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body className="reveal-entering">
         <PageReveal />
         <SoundEffects />
+        <CursorLabel />
         {children}
       </body>
     </html>

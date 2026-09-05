@@ -200,7 +200,7 @@ export const studies: Study[] = [
         paragraphs: [
           "LiveStroke eventually went from a Playground experiment to a real npm package, with ESM and CJS builds, TypeScript declarations, React as a peer dependency, and a proper cleanup before shipping.",
           "LiveStroke v0.3.0 now includes custom gradients, the reusable segmented control, and a Playground that generates the code you'd actually use.",
-          "As of September 2026, it has crossed 500 npm downloads.",
+          "As of September 2026, it has crossed 500+ npm downloads.",
         ],
       },
     ],

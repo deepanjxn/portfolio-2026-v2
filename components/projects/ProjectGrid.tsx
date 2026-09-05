@@ -48,12 +48,17 @@ interface CardRect {
                straight rect-to-rect path to its natural final position.
 
    Corner radius: the card's own scale transform would visually scale the
-   12px border-radius of the media surface with it (e.g. ~24px at the
-   single->split start), so while a flip runs a rAF loop reads the card's
-   current computed scale (sx, sy) and writes the surface's local radius
-   as 12/sx / 12/sy. The rendered radius therefore stays 12px in every
-   frame from first to last, and the inline radius is removed again once
-   the scale reaches 1 (resting border-radius stays 12px in both views).
+   radius of every rounded layer inside it (the 12px media frame AND the
+   16px inset clip) with it, so while a flip runs a rAF loop reads the
+   card's current computed scale (sx, sy) and writes each layer's LOCAL
+   radius as base/sx / base/sy (base read from data-radius-base). The
+   rendered radii therefore stay at their resting values in every frame
+   from first to last, and the inline radii are removed again once the
+   scale reaches 1 (resting radii stay 12px / 16px in both views).
+
+   The card is promoted with will-change: transform for the flight so
+   the whole subtree (video included) composites as one layer and no
+   inner element re-rasterizes or detaches from the card's transform.
 
    The underlying CSS layout and all card geometry are untouched; the
    transform is a temporary visual layer removed after the animation. */
@@ -164,14 +169,22 @@ function snapshotLayoutRects(
   return rects;
 }
 
+/* Every rounded layer of a card (frame surface AND inset clip) is
+   radius-compensated while the card is scaled, so each keeps its
+   resting radius visually constant during the FLIP instead of inflating
+   with the card's scale. */
+const RADIUS_TARGET_SELECTOR = "[data-radius-surface], [data-radius-clip]";
+
 function clearFlipStyles(container: HTMLDivElement) {
   for (const card of readCards(container).values()) {
     card.style.removeProperty("transform");
     card.style.removeProperty("transform-origin");
     card.style.removeProperty("transition");
-    const surface = card.querySelector<HTMLElement>("[data-radius-surface]");
-    if (surface) {
-      surface.style.removeProperty("border-radius");
+    card.style.removeProperty("will-change");
+    for (const layer of card.querySelectorAll<HTMLElement>(
+      RADIUS_TARGET_SELECTOR,
+    )) {
+      layer.style.removeProperty("border-radius");
     }
   }
 }
@@ -182,7 +195,6 @@ export default function ProjectGrid({ projects, view }: ProjectGridProps) {
   const previousViewRef = useRef<ViewMode | null>(null);
   const cleanupTimerRef = useRef<number | null>(null);
   const radiusLoopRef = useRef<number | null>(null);
-  const baseRadiusRef = useRef<number | null>(null);
 
   const stopRadiusLoop = useCallback(() => {
     if (radiusLoopRef.current !== null) {
@@ -191,36 +203,45 @@ export default function ProjectGrid({ projects, view }: ProjectGridProps) {
     }
   }, []);
 
-  /* While the cards are scaled by (sx, sy), the surface's local corner
-     radius must be 12/sx / 12/sy so the RENDERED radius stays a constant
-     12px every frame. Reads the live computed scale each frame; the
-     resting radius is never touched (scale 1 => radius removed again). */
+  /* While the cards are scaled by (sx, sy), every rounded layer's LOCAL
+     radius must be base/sx / base/sy (base read from data-radius-base,
+     defaulting to the 12px frame) so the RENDERED radius stays at its
+     resting value every frame. Reads the live computed scale each frame;
+     a resting layer (scale 1) never keeps an inline radius. */
   const startRadiusCompensation = useCallback(
     (moving: Array<{ card: HTMLElement }>) => {
       stopRadiusLoop();
-      const surfaces: Array<{ card: HTMLElement; surface: HTMLElement }> =
-        [];
+      const layers: Array<{ layer: HTMLElement; base: number }> = [];
       for (const { card } of moving) {
-        const surface = card.querySelector<HTMLElement>(
-          "[data-radius-surface]",
-        );
-        if (surface) surfaces.push({ card, surface });
+        for (const layer of card.querySelectorAll<HTMLElement>(
+          RADIUS_TARGET_SELECTOR,
+        )) {
+          const base = parseFloat(layer.dataset.radiusBase ?? "") || 12;
+          layers.push({ layer, base });
+        }
       }
-      if (surfaces.length === 0) return;
+      if (layers.length === 0) return;
 
-      const baseRadius = baseRadiusRef.current ?? 12;
+      const writeCompensatedRadius = (
+        layer: HTMLElement,
+        base: number,
+        sx: number,
+        sy: number,
+      ) => {
+        layer.style.borderRadius = `${base / sx}px / ${base / sy}px`;
+      };
 
       const tick = () => {
-        for (const { card, surface } of surfaces) {
+        for (const { layer, base } of layers) {
+          const card = layer.closest<HTMLElement>("[data-project-id]");
+          if (!card) continue;
           const { sx, sy } = readMatrix(card);
           const atRest =
             Math.abs(sx - 1) < 0.002 && Math.abs(sy - 1) < 0.002;
           if (atRest) {
-            surface.style.removeProperty("border-radius");
+            layer.style.removeProperty("border-radius");
           } else if (sx !== 0 && sy !== 0) {
-            surface.style.borderRadius = `${baseRadius / sx}px / ${
-              baseRadius / sy
-            }px`;
+            writeCompensatedRadius(layer, base, sx, sy);
           }
         }
         radiusLoopRef.current = window.requestAnimationFrame(tick);
@@ -264,18 +285,6 @@ export default function ProjectGrid({ projects, view }: ProjectGridProps) {
       : settledRectsRef.current;
 
     clearFlipStyles(container);
-
-    /* Cache the resting surface radius once, from a pristine state, so
-       the compensation always targets the true CSS radius (12px). */
-    if (baseRadiusRef.current === null) {
-      const sample = container.querySelector<HTMLElement>(
-        "[data-radius-surface]",
-      );
-      if (sample) {
-        baseRadiusRef.current =
-          parseFloat(getComputedStyle(sample).borderRadius) || 12;
-      }
-    }
 
     const nextRects = snapshotLayoutRects(container);
 
@@ -349,23 +358,24 @@ export default function ProjectGrid({ projects, view }: ProjectGridProps) {
       if (moving.length > 0) {
         /* INVERT: place every card visually back onto its old rect,
            before the browser paints the new layout. Also compensate the
-           surface radius synchronously for the initial scale — the first
-           painted frame happens before the rAF compensation loop's first
-           tick, so a loop-only approach would show one unscaled-radius
-           frame. */
-        const baseRadius = baseRadiusRef.current ?? 12;
+           radius of every rounded layer synchronously for the initial
+           scale — the first painted frame happens before the rAF
+           compensation loop's first tick, so a loop-only approach would
+           show one unscaled-radius frame. will-change promotes the card
+           (video included) onto a single composited layer for the whole
+           flight, so no inner element re-rasterizes or detaches from the
+           card's transform mid-animation. */
         for (const { card, dx, dy, sx, sy } of moving) {
           card.style.transformOrigin = "0 0";
           card.style.transition = "none";
+          card.style.willChange = "transform";
           card.style.transform = `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})`;
           if (sx !== 0 && sy !== 0) {
-            const surface = card.querySelector<HTMLElement>(
-              "[data-radius-surface]",
-            );
-            if (surface) {
-              surface.style.borderRadius = `${baseRadius / sx}px / ${
-                baseRadius / sy
-              }px`;
+            for (const layer of card.querySelectorAll<HTMLElement>(
+              RADIUS_TARGET_SELECTOR,
+            )) {
+              const base = parseFloat(layer.dataset.radiusBase ?? "") || 12;
+              layer.style.borderRadius = `${base / sx}px / ${base / sy}px`;
             }
           }
         }

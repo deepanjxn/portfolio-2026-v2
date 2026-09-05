@@ -13,6 +13,15 @@ export interface Project {
   poster?: string;
   alt?: string;
   aspectRatio?: string;
+  /* Native aspect ratio of the real media asset (e.g. "16 / 9" for the
+     webm). The inset media area adopts it so the media exactly fills
+     its clip box and rounded corners land on the visible media. */
+  mediaAspectRatio?: string;
+  /* Study-card cursor pill: the label shown next to the pointer while
+     hovering the card and the pill's background color. Cards without a
+     cursorColor fall back to a neutral default. */
+  cursorLabel?: string;
+  cursorColor?: string;
 }
 
 export const CATEGORY_LABELS: Record<ProjectCategory, string> = {
@@ -27,7 +36,13 @@ export const projects: Project[] = [
     slug: "livestroke",
     title: "LiveStroke",
     category: "studies",
-    mediaType: "image",
+    mediaType: "video",
+    videoSrc: "/studies/livestroke/livestroke-intro.webm",
+    poster: "/studies/livestroke/livestroke-poster.png",
+    alt: "LiveStroke animated gradient border around a button",
+    mediaAspectRatio: "16 / 9",
+    cursorLabel: "LiveStroke",
+    cursorColor: "#149334",
   },
   {
     id: "p02",
