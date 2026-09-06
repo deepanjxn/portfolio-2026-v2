@@ -9,3 +9,9 @@
 .workplace {
   margin-top: var(--space-32);
 }
+
+@media (hover: hover) and (pointer: fine) {
+  .layerLink:hover {
+    color: var(--color-accent-blue);
+  }
+}

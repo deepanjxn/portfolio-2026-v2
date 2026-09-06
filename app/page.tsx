@@ -26,7 +26,15 @@ export default function Home() {
               data-reveal
               style={{ "--reveal-delay": "200ms" } as CSSProperties}
             >
-              Currently at Layer
+              Currently at{" "}
+              <a
+                className={styles.layerLink}
+                href="https://www.withlayer.ai/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Layer
+              </a>
             </p>
           </section>
           <PortfolioSection projects={projects} />
