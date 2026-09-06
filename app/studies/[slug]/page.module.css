@@ -24,10 +24,10 @@
   margin-inline: auto;
 }
 
-/* Case-study title block: the H2 title and its P1 subtext sit centered
-   on the editorial column on every breakpoint. */
+/* Case-study title block: the H1 title and its P1 subtext sit
+   left-aligned on the editorial column on every breakpoint. */
 .header {
-  text-align: center;
+  text-align: left;
 }
 
 /* The title -> subtext gap: 8px (--space-8) on every breakpoint; the
@@ -80,12 +80,12 @@
   }
 }
 
-/* Case-study copy: one or more P1 paragraphs, centered on the column
-   like the header block above. Paragraphs inside the same scene are
-   close (32px); the major rhythm applies between scenes and their
-   media, never inside a text block. */
+/* Case-study copy: one or more P1 paragraphs, left-aligned on the
+   column. Paragraphs inside the same scene are close (32px); the major
+   rhythm applies between scenes and their media, never inside a text
+   block. */
 .text {
-  text-align: center;
+  text-align: left;
 }
 
 .text > * + * {

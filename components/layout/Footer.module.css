@@ -28,12 +28,15 @@
 
 @media (max-width: 767px) {
   .footer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-16);
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: var(--space-24);
   }
 
-  .links {
-    order: -1;
+  /* Mobile keeps only the short year on the left edge; the name and
+     rights line is hidden. */
+  .copyRest {
+    display: none;
   }
 }

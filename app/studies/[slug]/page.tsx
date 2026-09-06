@@ -49,7 +49,7 @@ export default async function StudyPage({
       <main className={styles.main}>
         <div className={`${styles.editorial} ${styles.header}`}>
           <h1
-            className="type-h2"
+            className="type-h1"
             data-reveal
             style={{ "--reveal-delay": "100ms" } as CSSProperties}
           >

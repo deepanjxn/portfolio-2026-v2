@@ -5,9 +5,11 @@
   column-gap: var(--space-24);
 }
 
-@media (max-width: 767px) {
+/* Stacked single-column structure, shared by tablet and mobile: every
+   section takes the full content width, in the order Experience,
+   Principles, Tools. Desktop stays the 3-column layout. */
+@media (max-width: 1024px) {
   .columns {
-    margin-top: var(--space-130);
     grid-template-columns: 1fr;
     row-gap: var(--space-64);
   }
@@ -22,5 +24,11 @@
 
   .tools {
     order: 3;
+  }
+}
+
+@media (max-width: 767px) {
+  .columns {
+    margin-top: var(--space-130);
   }
 }

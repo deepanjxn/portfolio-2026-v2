@@ -21,6 +21,14 @@
   padding: var(--space-16) 96px;
 }
 
+/* Tablet: the inner asset's horizontal inset narrows to 48px while the
+   vertical padding stays as the base value. */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .media {
+    padding: var(--space-16) 48px;
+  }
+}
+
 @media (max-width: 767px) {
   .media {
     padding: var(--space-16) var(--space-24);

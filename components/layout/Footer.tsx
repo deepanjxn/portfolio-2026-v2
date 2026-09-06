@@ -4,7 +4,8 @@ export default function Footer() {
   return (
     <footer className={`${styles.footer} container`}>
       <p className={`${styles.copy} type-h3`}>
-        © 2026 Deepanjan Sen. All rights reserved.
+        © 2026
+        <span className={styles.copyRest}> Deepanjan Sen. All rights reserved.</span>
       </p>
       <div className={styles.links}>
         <a className={`${styles.link} type-h3`} href="#">

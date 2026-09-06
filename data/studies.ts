@@ -54,8 +54,9 @@ export interface Study {
 export const studies: Study[] = [
   {
     slug: "livestroke",
-    title: "LiveStroke",
-    description: "Small React package for animated gradient borders",
+    title: "Making a gradient border feel simple",
+    description:
+      "Building a lightweight React component that makes animated gradient borders easy to use, customize, and ship.",
     blocks: [
       /* Section 1 visual (1/2) — hero animation, hosted on Vimeo. */
       {
