@@ -47,7 +47,7 @@ export default async function StudyPage({
     <>
       <Header />
       <main className={styles.main}>
-        <div className={styles.editorial}>
+        <div className={`${styles.editorial} ${styles.header}`}>
           <h1
             className="type-h2"
             data-reveal
@@ -55,20 +55,15 @@ export default async function StudyPage({
           >
             {study.title}
           </h1>
-          {study.description || study.year ? (
+          {study.description ? (
             <div
               className={styles.subtitleRow}
               data-reveal
               style={{ "--reveal-delay": "200ms" } as CSSProperties}
             >
-              {study.description ? (
-                <p className={`type-p1 ${styles.subtitle}`}>
-                  {study.description}
-                </p>
-              ) : null}
-              {study.year ? (
-                <p className={`type-p1 ${styles.date}`}>{study.year}</p>
-              ) : null}
+              <p className={`type-p1 ${styles.subtitle}`}>
+                {study.description}
+              </p>
             </div>
           ) : null}
         </div>

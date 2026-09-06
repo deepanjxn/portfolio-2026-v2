@@ -1,10 +1,11 @@
 /* Home-card media frame. The outer box keeps the card's layout box:
-   aspect ratio (default 16:10), the shared 12px --radius-card, the
-   light --color-surface-card frame fill, and the FLIP radius surface.
-   Real media renders inside a padded inset area with its own radius, so
-   the card reads as a framed product visual: gray frame around the
-   media, nothing full-bleed. Cards without real assets stay plain gray
-   frames (no inner media, identical look). */
+   aspect ratio (default 16:10, per-card value via --card-aspect), the
+   shared 12px --radius-card, the light --color-surface-card frame fill,
+   and the FLIP radius surface. Real media renders inside a padded inset
+   area with its own radius, so the card reads as a framed product
+   visual: gray frame around the media, nothing full-bleed. Cards
+   without real assets stay plain gray frames (no inner media,
+   identical look). */
 .media {
   position: relative;
   display: flex;
@@ -13,6 +14,7 @@
   overflow: hidden;
   border-radius: var(--radius-card);
   background: var(--color-surface-card);
+  aspect-ratio: var(--card-aspect, 16 / 10);
   /* Vertical padding keeps the media off the frame's top/bottom edges;
      the 96px horizontal insets create the wide side-frame the card
      design calls for (narrowed on mobile below). */
@@ -22,6 +24,11 @@
 @media (max-width: 767px) {
   .media {
     padding: var(--space-16) var(--space-24);
+  }
+
+  /* Study cards collapse to a square media frame on mobile. */
+  .media[data-square-mobile] {
+    aspect-ratio: 1 / 1;
   }
 }
 
@@ -37,6 +44,15 @@
   width: 100%;
   overflow: hidden;
   border-radius: 16px;
+  /* Soft drop shadow lifting the media off the gray card frame — applied
+     to the inner inset only, never the outer card. Consistent on every
+     breakpoint. */
+  box-shadow:
+    0 21px 6px #0000,
+    0 14px 5px #00000003,
+    0 8px 5px #0000000d,
+    0 3px 3px #00000017,
+    0 1px 2px #0000001a;
 }
 
 .inset img {

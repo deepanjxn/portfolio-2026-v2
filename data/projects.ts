@@ -40,9 +40,10 @@ export const projects: Project[] = [
     videoSrc: "/studies/livestroke/livestroke-intro.webm",
     poster: "/studies/livestroke/livestroke-poster.png",
     alt: "LiveStroke animated gradient border around a button",
+    aspectRatio: "3 / 2",
     mediaAspectRatio: "16 / 9",
     cursorLabel: "LiveStroke",
-    cursorColor: "#149334",
+    cursorColor: "#34C759",
   },
   {
     id: "p02",
@@ -50,6 +51,7 @@ export const projects: Project[] = [
     title: "Designing a healthcare scheduling product",
     category: "studies",
     mediaType: "image",
+    aspectRatio: "3 / 2",
   },
   {
     id: "p03",
@@ -57,6 +59,7 @@ export const projects: Project[] = [
     title: "Building a design system for a SaaS suite",
     category: "studies",
     mediaType: "image",
+    aspectRatio: "3 / 2",
   },
   {
     id: "p04",
@@ -64,6 +67,7 @@ export const projects: Project[] = [
     title: "Accessibility audit of a travel booking flow",
     category: "studies",
     mediaType: "image",
+    aspectRatio: "3 / 2",
   },
   {
     id: "p05",

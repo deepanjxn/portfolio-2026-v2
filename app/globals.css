@@ -19,7 +19,11 @@
   --space-32: 32px;
   --space-40: 40px;
   --space-64: 64px;
+  --space-80: 80px;
   --space-120: 120px;
+  --space-130: 130px;
+  --space-152: 152px;
+  --space-160: 160px;
 
   /* Radius tokens */
   --radius-card: 12px;

@@ -1,5 +1,5 @@
 .intro {
-  margin-top: var(--space-64);
+  margin-top: var(--space-120);
   max-width: 780px;
   display: flex;
   flex-direction: column;

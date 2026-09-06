@@ -7,7 +7,7 @@
 
 @media (max-width: 767px) {
   .columns {
-    margin-top: var(--space-64);
+    margin-top: var(--space-130);
     grid-template-columns: 1fr;
     row-gap: var(--space-64);
   }

@@ -1,15 +1,12 @@
 .main {
-  margin-top: 164px;
-  /* Closing gap mirrors the 164px opening gap: the global footer
-     already reserves 120px of top padding for itself, so the main
-     content adds the remaining 44px below the last editorial block. */
-  margin-bottom: calc(164px - var(--space-120));
-}
-
-@media (max-width: 767px) {
-  .main {
-    margin-top: var(--space-64);
-  }
+  /* Opening whitespace under the global header: 160px desktop/tablet,
+     152px mobile (overridden in the mobile block below).
+     Closing whitespace above the footer: the global footer reserves
+     120px of top padding itself, so .main's bottom margin tops that up
+     to the required 160px desktop/tablet (152px mobile) between the
+     last editorial block and the footer's first line. */
+  margin-top: var(--space-160);
+  margin-bottom: calc(var(--space-160) - var(--space-120));
 }
 
 /* Editorial column, centered inside the page.
@@ -27,46 +24,29 @@
   margin-inline: auto;
 }
 
-/* Study header row: subtitle (left) + year (right edge of the editorial
-   column) share one line, with an 8px gap from the title above. On
-   mobile the year drops below the subtitle with a 48px gap instead. */
+/* Case-study title block: the H2 title and its P1 subtext sit centered
+   on the editorial column on every breakpoint. */
+.header {
+  text-align: center;
+}
+
+/* The title -> subtext gap: 8px (--space-8) on every breakpoint; the
+   row only exists while a description is present. */
 .subtitleRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  column-gap: var(--space-24);
   margin-top: var(--space-8);
 }
 
 .subtitle {
-  flex: 1 1 auto;
-  min-width: 0;
   color: var(--color-text-secondary);
 }
 
-.date {
-  flex: none;
-  margin-left: auto;
-  color: var(--color-text-secondary);
-}
-
-@media (max-width: 767px) {
-  .subtitleRow {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  /* The base rule's margin-left: auto (kept, not reset to 0) pushes the
-     date to the right edge of the column; only the vertical 48px drop
-     below the subtitle changes on mobile. */
-  .date {
-    margin-top: 48px;
-  }
-}
-
-/* Major editorial section rhythm: 120px desktop, 88px mobile. */
+/* The subtext -> first asset gap: 160px desktop/tablet (--space-160),
+   152px mobile (overridden below). Major editorial rhythm between
+   blocks: desktop/tablet 120px (--space-120); mobile tightens to 80px
+   (--space-80). Cluster-internal gaps (16px) are not part of this
+   rhythm. */
 .body {
-  margin-top: var(--space-120);
+  margin-top: var(--space-160);
 }
 
 .body > * + * {
@@ -74,18 +54,40 @@
 }
 
 @media (max-width: 767px) {
+  /* Case-study mobile typography: the global mobile step-down shrinks
+     P1 to 14/20 (--text-p2-size values), but the case study keeps its
+     P1 — subtext and body paragraphs — at the desktop P1 size (16/24)
+     on every breakpoint. H2 (title and links) is already 16/24 on
+     mobile, so only the P1 tokens need re-pointing, scoped to the
+     editorial area: the global tokens and every other page stay
+     untouched. */
+  .main {
+    --text-p1-size: 16px;
+    --text-p1-line-height: 24px;
+  }
+
+  .main {
+    margin-top: var(--space-152);
+    margin-bottom: calc(var(--space-152) - var(--space-120));
+  }
+
   .body {
-    margin-top: 88px;
+    margin-top: var(--space-152);
   }
 
   .body > * + * {
-    margin-top: 88px;
+    margin-top: var(--space-80);
   }
 }
 
-/* Case-study copy: one or more P1 paragraphs. Paragraphs inside the
-   same scene are close (32px); the 120px/88px rhythm applies between
-   scenes and their media, never inside a text block. */
+/* Case-study copy: one or more P1 paragraphs, centered on the column
+   like the header block above. Paragraphs inside the same scene are
+   close (32px); the major rhythm applies between scenes and their
+   media, never inside a text block. */
+.text {
+  text-align: center;
+}
+
 .text > * + * {
   margin-top: var(--space-32);
 }
@@ -149,8 +151,8 @@
    side by side when width allows and stack below; the internal gap is
    exactly 16px (--space-16) on BOTH axes at every breakpoint (horizontal
    rows, vertical stacks, and wrapped layouts alike). This 16px
-   cluster-internal spacing is separate from the 120px/88px major
-   section rhythm between clusters and other sections. */
+   cluster-internal spacing is separate from the 120px major section
+   rhythm between clusters and other sections. */
 .cluster {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));

@@ -7,7 +7,7 @@ import { projects } from "./projects";
    A study is an editorial sequence of alternating copy and visuals
    ("scenes"): each text block carries its own paragraphs, followed by
    the media block(s) that illustrate that copy. Major editorial rhythm
-   (120px desktop / 88px mobile) separates blocks; paragraphs inside one
+   (120px desktop / 80px mobile) separates blocks; paragraphs inside one
    text block are closer (32px).
 
    All LiveStroke assets live under /public/studies/LiveStroke/ and are
@@ -48,7 +48,6 @@ export interface Study {
   slug: string;
   title: string;
   description?: string;
-  year?: string;
   blocks: StudyBlock[];
 }
 
@@ -57,7 +56,6 @@ export const studies: Study[] = [
     slug: "livestroke",
     title: "LiveStroke",
     description: "Small React package for animated gradient borders",
-    year: "2026",
     blocks: [
       /* Section 1 visual (1/2) — hero animation, hosted on Vimeo. */
       {

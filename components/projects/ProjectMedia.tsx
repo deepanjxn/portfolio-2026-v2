@@ -14,8 +14,11 @@ function videoMime(src: string): string {
 }
 
 export default function ProjectMedia({ project }: { project: Project }) {
-  const aspectRatio = project.aspectRatio ?? DEFAULT_ASPECT_RATIO;
-  const ratioStyle = { aspectRatio } satisfies CSSProperties;
+  /* Custom property rather than an inline aspect-ratio so a stylesheet
+     media query can override it on mobile (inline styles always win). */
+  const ratioStyle = {
+    "--card-aspect": project.aspectRatio ?? DEFAULT_ASPECT_RATIO,
+  } as CSSProperties;
   /* The inset area adopts the MEDIA's own native ratio (not the outer
      frame's) so the video/image exactly fills its clip box — no
      object-fit letterboxing inside it, which means the 16px clip radius
@@ -28,7 +31,12 @@ export default function ProjectMedia({ project }: { project: Project }) {
      cards without an asset render the bare frame as before. */
   if (project.mediaType === "image" && project.thumbnail) {
     return (
-      <div className={styles.media} data-radius-surface style={ratioStyle}>
+      <div
+        className={styles.media}
+        data-radius-surface
+        data-square-mobile={project.category === "studies" || undefined}
+        style={ratioStyle}
+      >
         <div
           className={styles.inset}
           data-radius-clip
@@ -49,7 +57,12 @@ export default function ProjectMedia({ project }: { project: Project }) {
 
   if (project.mediaType === "video" && project.videoSrc) {
     return (
-      <div className={styles.media} data-radius-surface style={ratioStyle}>
+      <div
+        className={styles.media}
+        data-radius-surface
+        data-square-mobile={project.category === "studies" || undefined}
+        style={ratioStyle}
+      >
         <div
           className={styles.inset}
           data-radius-clip
@@ -77,6 +90,7 @@ export default function ProjectMedia({ project }: { project: Project }) {
     <div
       className={styles.media}
       data-radius-surface
+      data-square-mobile={project.category === "studies" || undefined}
       style={ratioStyle}
       aria-hidden="true"
     />
