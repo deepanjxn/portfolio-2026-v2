@@ -204,6 +204,146 @@ export const studies: Study[] = [
       },
     ],
   },
+  {
+    slug: "filterpixel",
+    title: "Making AI photo editing feel effortless",
+    description:
+      "Redesigning FilterPixel around the real workflow of event photographers, bringing culling, editing, and exporting together without adding more complexity.",
+    blocks: [
+      /* Opening hero video, the first visual on the page directly
+         after the title and subtext block, with the opener copy
+         following below it. */
+      {
+        type: "media",
+        media: {
+          src: "/studies/filterpixel/filterpixel-intro.webm",
+          alt: "FilterPixel intro, the AI photo culling and editing interface",
+        },
+      },
+      {
+        type: "text",
+        paragraphs: [
+          "For about three months, starting in December 2024, I led the end-to-end product design for FilterPixel, an AI-powered photo culling and editing platform built for event and wedding photographers.",
+          "The product was already live and being used by real photographers. My job was to make an existing workflow feel faster, simpler, and more connected.",
+        ],
+        link: {
+          label: "Experience FilterPixel",
+          href: "https://filterpixel.com/",
+        },
+      },
+
+      /* Blank placeholder for the next FilterPixel visual, added
+         after the opening copy and its link. */
+      { type: "media", media: {} },
+
+      /* Scene 2, the "real product" copy, followed by a small,
+         visually secondary cluster of placeholders: Trustpilot
+         rating, YouTube thumbnails, press and partner logos. */
+      {
+        type: "text",
+        paragraphs: [
+          "FilterPixel wasn't a concept or a greenfield project. It was an established product with a growing user base, a library of educational content, and photographers relying on it to get through real deadlines.",
+          "That meant every design decision had to work within an existing product and workflow, not just look good in a prototype.",
+        ],
+      },
+      {
+        type: "media-cluster",
+        items: [{}, {}, {}],
+      },
+
+      /* Scene 3, the problem copy, followed by the before/after
+         workflow diagram placeholder: two separate app windows, a
+         friction point, then one unified experience (gallery-4 can be
+         used later). */
+      {
+        type: "text",
+        paragraphs: [
+          "The basic workflow was already there: import, cull, edit, export.",
+          "The problem was that it was split across two separate applications. Every hand-off meant more switching, more waiting, and more mental overhead, especially when you're working through thousands of photos on a deadline.",
+          "I wasn't trying to reinvent photo editing. I wanted to remove the friction between the parts that were already working.",
+        ],
+      },
+      { type: "media", media: {} },
+
+      /* Scene 4, the user research copy, followed by a two-panel
+         cluster (gallery-2, gallery-3). */
+      {
+        type: "text",
+        paragraphs: [
+          "FilterPixel already had thousands of active users, so I didn't want to guess at what was slowing them down.",
+          "I surveyed 168 photographers to find the recurring problems, then spoke with 10 photographers at different experience levels to understand what was behind those patterns.",
+          "The interviews surfaced a lot of smaller frustrations that the survey data alone couldn't explain, and those insights shaped most of what came next.",
+        ],
+      },
+      {
+        type: "media-cluster",
+        items: [{}, {}],
+      },
+
+      /* Scene 5, the opportunity copy, followed by a side-by-side
+         cluster: the Elena persona and empathy map next to the
+         competitive comparison. */
+      {
+        type: "text",
+        paragraphs: [
+          "I turned that research into a persona, Elena, to give the team someone concrete to design for. I mapped out what she was thinking, feeling, and struggling with throughout the workflow.",
+          "I also looked at Lightroom, Capture One, Luminar, and Darktable. The takeaway wasn't that FilterPixel needed to compete with them feature for feature.",
+          "Its opportunity was different: let AI take care of more of the repetitive work, while keeping the photographer in control.",
+        ],
+      },
+      {
+        type: "media-cluster",
+        items: [{}, {}],
+      },
+
+      /* Scene 6, the design process copy, followed by the visual
+         progression placeholder: wireframes, high fidelity,
+         components, final product (gallery-6, gallery-7, gallery-8,
+         gallery-10, gallery-9; animated.webm can later serve the
+         motion). */
+      {
+        type: "text",
+        paragraphs: [
+          "Once the direction was clear, I started with low-fidelity wireframes to work through the navigation and core flows with stakeholders.",
+          "After validating those, I moved into high fidelity and started building a design system around the product, shared components, typography, spacing, and interaction patterns that could work across both culling and editing.",
+          "The goal was to make the product feel like one system rather than two experiences stitched together.",
+        ],
+      },
+      {
+        type: "media-cluster",
+        items: [{}, {}, {}, {}, {}],
+      },
+
+      /* Scene 7, the results copy, followed by a three-panel cluster
+         (gallery-11, gallery-12, gallery-13) and then one separate
+         empty video placeholder for customer testimonial footage. */
+      {
+        type: "text",
+        paragraphs: [
+          "The redesign brought importing, culling, editing, and exporting into one connected workflow, removing the context switching that started this project in the first place.",
+          "AI-assisted presets helped reduce editing time, while usability testing helped improve the key flows.",
+          "But the most useful feedback came from the people actually using the product. Photographers talked about getting through large weddings faster, turning days of work into hours, and spending far less time on the parts of the process that used to slow them down.",
+        ],
+      },
+      {
+        type: "media-cluster",
+        items: [{}, {}, {}],
+      },
+      { type: "media", media: {} },
+
+      /* Scene 8, the closing copy, followed by one final quiet visual
+         placeholder (outro.webp or a simple stat card for 50,000+
+         photographers, added later). */
+      {
+        type: "text",
+        paragraphs: [
+          "The product has continued to grow since I worked on it, but the core idea remains the same: help photographers spend less time managing their workflow and more time on the work itself.",
+          "Today, FilterPixel is trusted by 50,000+ photographers and studios worldwide.",
+        ],
+      },
+      { type: "media", media: {} },
+    ],
+  },
 ];
 
 /* Skeleton used while a homepage study has no authored entry yet: the

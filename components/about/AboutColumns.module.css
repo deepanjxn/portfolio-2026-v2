@@ -5,25 +5,29 @@
   column-gap: var(--space-24);
 }
 
+/* Reading order on every breakpoint: Experience, Principles, Tools
+   (the data lists Tools first, so grid order always re-sequences it).
+   Desktop keeps the 3-column layout with Experience in the first
+   column; tablet and mobile stack the sections in that same order. */
+.experience {
+  order: 1;
+}
+
+.principles {
+  order: 2;
+}
+
+.tools {
+  order: 3;
+}
+
 /* Stacked single-column structure, shared by tablet and mobile: every
-   section takes the full content width, in the order Experience,
-   Principles, Tools. Desktop stays the 3-column layout. */
+   section takes the full content width, still in the Experience,
+   Principles, Tools order from the base rules above. */
 @media (max-width: 1024px) {
   .columns {
     grid-template-columns: 1fr;
     row-gap: var(--space-64);
-  }
-
-  .experience {
-    order: 1;
-  }
-
-  .principles {
-    order: 2;
-  }
-
-  .tools {
-    order: 3;
   }
 }
 

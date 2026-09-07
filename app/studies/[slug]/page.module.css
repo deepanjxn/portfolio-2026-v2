@@ -43,8 +43,10 @@
 /* The subtext -> first asset gap: 160px desktop/tablet (--space-160),
    152px mobile (overridden below). Major editorial rhythm between
    blocks: desktop/tablet 120px (--space-120); mobile tightens to 80px
-   (--space-80). Cluster-internal gaps (16px) are not part of this
-   rhythm. */
+   (--space-80). Typography here — H1 title, P1 subtext and paragraphs,
+   H2 links — always comes from the shared tokens (P1 stays 16/24 on
+   mobile via the global tokens, no page-level override). Cluster-internal
+   gaps (16px) are not part of this rhythm. */
 .body {
   margin-top: var(--space-160);
 }
@@ -54,18 +56,6 @@
 }
 
 @media (max-width: 767px) {
-  /* Case-study mobile typography: the global mobile step-down shrinks
-     P1 to 14/20 (--text-p2-size values), but the case study keeps its
-     P1 — subtext and body paragraphs — at the desktop P1 size (16/24)
-     on every breakpoint. H2 (title and links) is already 16/24 on
-     mobile, so only the P1 tokens need re-pointing, scoped to the
-     editorial area: the global tokens and every other page stay
-     untouched. */
-  .main {
-    --text-p1-size: 16px;
-    --text-p1-line-height: 24px;
-  }
-
   .main {
     margin-top: var(--space-152);
     margin-bottom: calc(var(--space-152) - var(--space-120));

@@ -47,14 +47,15 @@
   --text-p2-line-height: 20px;
 }
 
-/* Typography tokens — mobile */
+/* Typography tokens — mobile.
+   Only H1 steps down on mobile; P1 (16/24) and P2 (14/20) keep their
+   desktop sizes on every breakpoint, so their mobile values come from
+   the base tokens above. */
 @media (max-width: 767px) {
   :root {
     --page-gutter: 16px;
     --text-h1-size: 20px;
     --text-h1-line-height: 28px;
-    --text-p1-size: 14px;
-    --text-p1-line-height: 20px;
   }
 }
 
