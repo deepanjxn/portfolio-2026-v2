@@ -102,18 +102,18 @@ export const studies: Study[] = [
       /* Third visual — the two images stacked vertically (Image 1 on
          top, Image 2 below, 16px grouped gap between them): code
          example on top, rendered result underneath.
-         assets: /studies/livestroke/livestroke-1.png (top),
-                 /studies/livestroke/livestroke-2.png (bottom) */
+         assets: /studies/livestroke/livestroke-1.webp (top),
+                 /studies/livestroke/livestroke-2.webp (bottom) */
       {
         type: "media-cluster",
         layout: "stack",
         items: [
           {
-            src: "/studies/livestroke/livestroke-1.png",
+            src: "/studies/livestroke/livestroke-1.webp",
             alt: "LiveStroke code example: the component wrapped around a button",
           },
           {
-            src: "/studies/livestroke/livestroke-2.png",
+            src: "/studies/livestroke/livestroke-2.webp",
             alt: "LiveStroke rendered gradient border result",
           },
         ],
@@ -129,11 +129,11 @@ export const studies: Study[] = [
       },
 
       /* Visual for the "hardest bug" copy below.
-         asset: /studies/livestroke/livestroke-3.png */
+         asset: /studies/livestroke/livestroke-3.webp */
       {
         type: "media",
         media: {
-          src: "/studies/livestroke/livestroke-3.png",
+          src: "/studies/livestroke/livestroke-3.webp",
           alt: "LiveStroke Playground controls",
         },
       },
@@ -165,11 +165,11 @@ export const studies: Study[] = [
         ],
       },
       /* Visual for the "fix" copy above.
-         asset: /studies/livestroke/livestroke-components.png */
+         asset: /studies/livestroke/livestroke-components.webp */
       {
         type: "media",
         media: {
-          src: "/studies/livestroke/livestroke-components.png",
+          src: "/studies/livestroke/livestroke-components.webp",
           alt: "LiveStroke interaction working after the fix",
         },
       },
