@@ -24,6 +24,10 @@ export interface StudyMedia {
   src?: string;
   vimeo?: string;
   alt?: string;
+  /* Vimeo only: size the iframe to the video's native 16:9 and center it
+     in the 16:10 editorial box so the player covers the whole frame (the
+     box crops the overflow) instead of letterboxing the video. */
+  cover?: boolean;
 }
 
 export type StudyBlock =
@@ -232,13 +236,18 @@ export const studies: Study[] = [
         },
       },
 
-      /* Blank placeholder for the next FilterPixel visual, added
-         after the opening copy and its link. */
-      { type: "media", media: {} },
+      /* First FilterPixel visual, directly after the opening copy and
+         its link: the product walkthrough video. */
+      {
+        type: "media",
+        media: {
+          src: "/studies/filterpixel/filterpixel-11.webm",
+          alt: "FilterPixel product walkthrough showing the connected import, cull, edit, and export workflow",
+        },
+      },
 
-      /* Scene 2, the "real product" copy, followed by a small,
-         visually secondary cluster of placeholders: Trustpilot
-         rating, YouTube thumbnails, press and partner logos. */
+      /* Scene 2, the "real product" copy, followed by the FilterPixel
+         early-feedback visual. */
       {
         type: "text",
         paragraphs: [
@@ -247,14 +256,15 @@ export const studies: Study[] = [
         ],
       },
       {
-        type: "media-cluster",
-        items: [{}, {}, {}],
+        type: "media",
+        media: {
+          src: "/studies/filterpixel/filterpixel-15.webp",
+          alt: "FilterPixel early feedback from photographers: six review cards about the fragmented culling and editing workflow",
+        },
       },
 
-      /* Scene 3, the problem copy, followed by the before/after
-         workflow diagram placeholder: two separate app windows, a
-         friction point, then one unified experience (gallery-4 can be
-         used later). */
+      /* Scene 3, the problem copy, followed by the two-app workflow
+         visual (FilterPixel Cull and FilterPixel Edit side by side). */
       {
         type: "text",
         paragraphs: [
@@ -263,10 +273,16 @@ export const studies: Study[] = [
           "I wasn't trying to reinvent photo editing. I wanted to remove the friction between the parts that were already working.",
         ],
       },
-      { type: "media", media: {} },
+      {
+        type: "media",
+        media: {
+          src: "/studies/filterpixel/filterpixel-2.webp",
+          alt: "FilterPixel Cull and FilterPixel Edit as two separate apps, with the caption about context switching between culling and editing",
+        },
+      },
 
-      /* Scene 4, the user research copy, followed by a two-panel
-         cluster (gallery-2, gallery-3). */
+      /* Scene 4, the user research copy, followed by the survey results
+         and the interview questions stacked vertically (16px gap). */
       {
         type: "text",
         paragraphs: [
@@ -277,12 +293,21 @@ export const studies: Study[] = [
       },
       {
         type: "media-cluster",
-        items: [{}, {}],
+        layout: "stack",
+        items: [
+          {
+            src: "/studies/filterpixel/filterpixel-3.webp",
+            alt: "FilterPixel survey results from 168 photographers: 82% use the app for culling and 18% for editing, with what they expect from culling software",
+          },
+          {
+            src: "/studies/filterpixel/filterpixel-4.webp",
+            alt: "FilterPixel interview questions covering culling workflows, speed versus accuracy, and what a premium experience means",
+          },
+        ],
       },
 
-      /* Scene 5, the opportunity copy, followed by a side-by-side
-         cluster: the Elena persona and empathy map next to the
-         competitive comparison. */
+      /* Scene 5, the opportunity copy, followed by the empathy map and
+         the research tracker stacked vertically (16px gap). */
       {
         type: "text",
         paragraphs: [
@@ -293,55 +318,140 @@ export const studies: Study[] = [
       },
       {
         type: "media-cluster",
-        items: [{}, {}],
+        layout: "stack",
+        items: [
+          {
+            src: "/studies/filterpixel/filterpixel-5.webp",
+            alt: "Elena empathy map: what the photographer does, thinks, says, and feels across the workflow",
+          },
+          {
+            src: "/studies/filterpixel/filterpixel-6.webp",
+            alt: "FilterPixel research tracker spreadsheet with research areas, methods, status, and insights",
+          },
+        ],
       },
 
-      /* Scene 6, the design process copy, followed by the visual
-         progression placeholder: wireframes, high fidelity,
-         components, final product (gallery-6, gallery-7, gallery-8,
-         gallery-10, gallery-9; animated.webm can later serve the
-         motion). */
+      /* Scene 6, the design process copy, followed by the product video
+         (Vimeo, muted autoplay loop), the "one system" takeaway line as
+         its own text block, and then the visual progression: wireframes,
+         high fidelity, the final product, and the design system, stacked
+         full-width with the 16px grouped gap. */
       {
         type: "text",
         paragraphs: [
           "Once the direction was clear, I started with low-fidelity wireframes to work through the navigation and core flows with stakeholders.",
           "After validating those, I moved into high fidelity and started building a design system around the product, shared components, typography, spacing, and interaction patterns that could work across both culling and editing.",
+        ],
+      },
+      {
+        type: "media",
+        media: {
+          vimeo: "1085247810",
+          alt: "FilterPixel",
+          cover: true,
+        },
+      },
+      {
+        type: "text",
+        paragraphs: [
           "The goal was to make the product feel like one system rather than two experiences stitched together.",
         ],
       },
       {
         type: "media-cluster",
-        items: [{}, {}, {}, {}, {}],
+        layout: "stack",
+        items: [
+          {
+            src: "/studies/filterpixel/filterpixel-7.webp",
+            alt: "FilterPixel low-fidelity wireframes covering the home screen, onboarding, culling grid, and culling details",
+          },
+          {
+            src: "/studies/filterpixel/filterpixel-8.webp",
+            alt: "FilterPixel high-fidelity screens for export, culling, key faces, and AI profiles",
+          },
+          {
+            src: "/studies/filterpixel/filterpixel-9.webp",
+            alt: "FilterPixel final product screens for profile, adjustments, editing, and the AI profiles marketplace",
+          },
+          {
+            src: "/studies/filterpixel/filterpixel-10.webp",
+            alt: "FilterPixel design system with the reusable component library and color tokens",
+          },
+        ],
       },
 
-      /* Scene 7, the results copy, followed by a three-panel cluster
-         (gallery-11, gallery-12, gallery-13) and then one separate
-         empty video placeholder for customer testimonial footage. */
+      /* Scene 7, the results copy, followed by a second instance of the
+         product walkthrough video, the "most useful feedback" line as
+         its own text block, and then the customer testimonial footage
+         as ONE vertical video cluster: the two Vimeo videos 16px apart
+         (the grouped cluster gap, not the 120px section rhythm). Both
+         are native 16:10, so the 16:10 media frame fills them edge to
+         edge — no cover override needed. */
       {
         type: "text",
         paragraphs: [
           "The redesign brought importing, culling, editing, and exporting into one connected workflow, removing the context switching that started this project in the first place.",
           "AI-assisted presets helped reduce editing time, while usability testing helped improve the key flows.",
+        ],
+      },
+      {
+        type: "media",
+        media: {
+          src: "/studies/filterpixel/filterpixel-11.webm",
+          alt: "FilterPixel product walkthrough showing the connected import, cull, edit, and export workflow",
+        },
+      },
+      {
+        type: "text",
+        paragraphs: [
           "But the most useful feedback came from the people actually using the product. Photographers talked about getting through large weddings faster, turning days of work into hours, and spending far less time on the parts of the process that used to slow them down.",
         ],
       },
       {
         type: "media-cluster",
-        items: [{}, {}, {}],
+        layout: "stack",
+        items: [
+          {
+            vimeo: "1226865892",
+            alt: "cursorful-video-1789456572450",
+          },
+          {
+            vimeo: "1226870792",
+            alt: "cursorful-video-1789457879220",
+          },
+        ],
       },
-      { type: "media", media: {} },
 
-      /* Scene 8, the closing copy, followed by one final quiet visual
-         placeholder (outro.webp or a simple stat card for 50,000+
-         photographers, added later). */
+      /* Scene 8, the closing copy with the Customer Reviews CTA, using
+         the same action-link treatment as the opening "Experience
+         FilterPixel" link, followed at the standard section rhythm by
+         the two review visuals stacked vertically (16px apart): the
+         Trustpilot summary and then the testimonial card. */
       {
         type: "text",
         paragraphs: [
           "The product has continued to grow since I worked on it, but the core idea remains the same: help photographers spend less time managing their workflow and more time on the work itself.",
           "Today, FilterPixel is trusted by 50,000+ photographers and studios worldwide.",
         ],
+        link: {
+          label: "Customer Reviews",
+          href: "https://www.trustpilot.com/review/filterpixel.com",
+        },
       },
-      { type: "media", media: {} },
+      {
+        type: "media-cluster",
+        layout: "stack",
+        items: [
+          {
+            src: "/studies/filterpixel/filterpixel-13.webp",
+            alt: "FilterPixel rated Excellent on Trustpilot based on 175 reviews, with review highlights and verified customer reviews",
+          },
+          {
+            src: "/studies/filterpixel/filterpixel-16.webp",
+            alt: "Sourav Das, Sr. Product Manager at FilterPixel, on working with Deepanjan on the FilterPixel V4 UI/UX",
+          },
+        ],
+      },
     ],
   },
 ];

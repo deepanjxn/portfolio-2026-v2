@@ -17,6 +17,22 @@
   border: 0;
 }
 
+/* Cover variant for Vimeo embeds whose native 16:9 player would
+   letterbox inside the 16:10 editorial box: the iframe is sized to its
+   own 16:9 ratio and centered, so the player viewport matches the video
+   exactly and the surrounding .media box crops the horizontal overflow
+   — the video covers the whole frame (object-fit: cover equivalent)
+   with no bars and no distortion. */
+.cover {
+  inset: auto;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  height: 100%;
+  aspect-ratio: 16 / 9;
+  transform: translate(-50%, -50%);
+}
+
 /* Transparent pointer-capturing layer above the Vimeo iframe. A
    cross-origin iframe never reports hover to the parent document, so
    without it the media box could not scale on hover over the video.

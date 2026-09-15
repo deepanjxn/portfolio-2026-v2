@@ -30,7 +30,9 @@ function VimeoEmbed({ media }: { media: StudyMediaData }) {
   return (
     <>
       <iframe
-        className={`${styles.fill} ${styles.embed}`}
+        className={`${styles.fill} ${styles.embed} ${
+          media.cover ? styles.cover : ""
+        }`}
         src={`https://player.vimeo.com/video/${vimeo}${VIMEO_EMBED_PARAMS}`}
         title={alt ?? "Embedded video"}
         allow="autoplay; fullscreen; picture-in-picture"
