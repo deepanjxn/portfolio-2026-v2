@@ -216,12 +216,14 @@ export const studies: Study[] = [
     blocks: [
       /* Opening hero video, the first visual on the page directly
          after the title and subtext block, with the opener copy
-         following below it. */
+         following below it. Hosted on Vimeo; `cover` fills the 16:10
+         frame with the native 16:9 player (cropped, centered). */
       {
         type: "media",
         media: {
-          src: "/studies/filterpixel/filterpixel-intro.webm",
-          alt: "FilterPixel intro, the AI photo culling and editing interface",
+          vimeo: "1227040848",
+          alt: "filterpixel-intro",
+          cover: true,
         },
       },
       {
@@ -450,6 +452,146 @@ export const studies: Study[] = [
             src: "/studies/filterpixel/filterpixel-16.webp",
             alt: "Sourav Das, Sr. Product Manager at FilterPixel, on working with Deepanjan on the FilterPixel V4 UI/UX",
           },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "paperclip",
+    title: "Making selling as easy as taking a photo",
+    description:
+      "Designing Paperclip's AI-powered resale experience to remove the work between taking a photo and completing a sale.",
+    blocks: [
+      /* Opening Vimeo embed, above the opening copy. `cover` sizes the
+         16:9 player to the full height of the 16:10 box and centers it,
+         so the box crops the overflow — no letterboxing. */
+      {
+        type: "media",
+        media: {
+          vimeo: "1085649092",
+          alt: "Paperclip IOS Listing",
+          cover: true,
+        },
+      },
+
+      /* Scene 1 — the opener. */
+      {
+        type: "text",
+        paragraphs: [
+          "For eight months, starting in September 2024, I led the product design for Paperclip, an AI-powered marketplace for buying and selling second-hand goods.",
+          "The idea was simple: make selling something online feel as easy as taking a photo of it.",
+        ],
+        link: {
+          label: "Download Paperclip (only available in UK)",
+          href: "https://apps.apple.com/gb/app/ai-marketplace-paperclip/id990240447",
+        },
+      },
+      /* Hero visual — the Paperclip dashboard. */
+      {
+        type: "media",
+        media: {
+          src: "/studies/paperclip/paperclip-1.webp",
+          alt: "Paperclip dashboard",
+        },
+      },
+
+      /* Scene 2 — selling shouldn't feel like work. */
+      {
+        type: "text",
+        paragraphs: [
+          "Selling something online still takes more effort than it should. You have to write the listing, figure out what it's worth, upload the right photos, answer questions, and eventually coordinate payment and delivery.",
+          "I wanted Paperclip to take care of as much of that work as possible, without making the experience feel automated or impersonal.",
+        ],
+      },
+      /* Visual placeholder for the traditional listing process
+         collapsing into the snap-to-list experience. */
+      { type: "media" },
+
+      /* Scene 3 — understanding the resale experience. Competitive
+         journey research and survey results as ONE cluster. */
+      {
+        type: "text",
+        paragraphs: [
+          "Before opening Figma, I spent time understanding how people actually buy and sell second-hand.",
+          "I looked at platforms like Depop, Vinted, and Shpock across the full journey, then surveyed 100 regular resale users to understand where people were spending the most time and where automation could genuinely help.",
+        ],
+      },
+      {
+        type: "media-cluster",
+        layout: "stack",
+        items: [{}, {}],
+      },
+
+      /* Scene 4 — finding the patterns. Affinity map and persona /
+         empathy map as ONE cluster. */
+      {
+        type: "text",
+        paragraphs: [
+          "Once the responses started coming in, I grouped them into recurring themes instead of treating every comment as a separate problem.",
+          "That gave me a clearer picture of what people actually needed, and a persona built from the research gave the team something concrete to design around. It became much easier to ask, “Would this actually make selling easier for them?”",
+        ],
+      },
+      {
+        type: "media-cluster",
+        layout: "stack",
+        items: [{}, {}],
+      },
+
+      /* Scene 5 — removing the unnecessary steps. User flow and early
+         wireframes as ONE cluster. */
+      {
+        type: "text",
+        paragraphs: [
+          "Mapping the journey from taking a photo to completing a sale made one thing obvious: there were too many steps between the two.",
+          "I started with low-fidelity wireframes to strip the flow back, test the structure, and figure out what could be automated before worrying about the visual design.",
+        ],
+      },
+      {
+        type: "media-cluster",
+        layout: "stack",
+        items: [{}, {}],
+      },
+
+      /* Scene 6 — turning the flow into a product. Wireframes,
+         components, high fidelity, and the final screens / design
+         system as ONE four-item cluster. */
+      {
+        type: "text",
+        paragraphs: [
+          "Once the core flow felt right, I moved into high fidelity and started building the design system alongside it.",
+          "Shared components, typography, spacing, and interaction patterns gave Paperclip a consistent foundation and made it easier to keep moving quickly as the product grew.",
+        ],
+      },
+      {
+        type: "media-cluster",
+        layout: "stack",
+        items: [{}, {}, {}, {}],
+      },
+
+      /* Scene 7 — the result. Primary outcome / demo and supporting
+         testimonials / outcome feedback as ONE cluster, followed at the
+         major section rhythm by the closing visual. */
+      {
+        type: "text",
+        paragraphs: [
+          "The biggest change was how little work the seller had to do.",
+          "AI-assisted listing reduced the time it took to create a listing by 85%, and every participant in usability testing completed the listing-to-shipping flow without getting stuck.",
+          "When the app launched, it reached a 4.9-star rating on the App Store, but the feedback I found most interesting was much simpler: people just felt like selling something wasn't such a chore anymore.",
+        ],
+      },
+      {
+        type: "media-cluster",
+        layout: "stack",
+        items: [{}, {}],
+      },
+      /* Closing visual placeholder. */
+      { type: "media" },
+
+      /* Conceptual closing line. */
+      {
+        type: "text",
+        paragraphs: [
+          "Selling something should be as easy as taking a photo of it.",
         ],
       },
     ],

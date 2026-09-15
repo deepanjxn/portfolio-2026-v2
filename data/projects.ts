@@ -60,6 +60,23 @@ export const projects: Project[] = [
     cursorColor: "#34C759",
   },
   {
+    /* Inserted after FilterPixel so Paperclip is the third Study card.
+       Same cover treatment as the other authored studies: webm intro
+       inside the shared inset frame, 16:9 like the native asset. */
+    id: "p02b",
+    slug: "paperclip",
+    title: "Paperclip",
+    category: "studies",
+    mediaType: "video",
+    videoSrc: "/studies/paperclip/paperclip-intro.webm",
+    poster: "/studies/paperclip/paperclip-poster.webp",
+    alt: "Paperclip AI-powered resale marketplace interface",
+    aspectRatio: "3 / 2",
+    mediaAspectRatio: "16 / 9",
+    cursorLabel: "Paperclip",
+    cursorColor: "#FF2D55",
+  },
+  {
     id: "p03",
     slug: "healthcare-scheduling",
     title: "Designing a healthcare scheduling product",
