@@ -51,7 +51,7 @@ export const projects: Project[] = [
     title: "FilterPixel",
     category: "studies",
     mediaType: "video",
-    videoSrc: "/studies/filterpixel/filterpixel-intro-2.webm",
+    videoSrc: "/studies/filterpixel/filterpixel-intro.webm",
     poster: "/studies/filterpixel/filterpixel-poster.webp",
     alt: "FilterPixel AI photo culling and editing interface",
     aspectRatio: "3 / 2",
