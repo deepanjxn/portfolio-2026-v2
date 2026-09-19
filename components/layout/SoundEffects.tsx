@@ -7,13 +7,16 @@ import { useEffect, useRef } from "react";
    data-hover-sound (project cards), and a distinct click-enter sound
    when a hyperlink or button is clicked. One delegated
    pointerover/click listener pair covers every target on the site,
-   including targets added later. Hover sound is restricted to REAL
-   mouse hovers: the device must report a hover-capable fine pointer,
-   and the event itself must not be derived from a touch interaction —
-   Chrome synthesizes compatibility pointerover events (pointerType
-   "mouse") from touch scrolls/taps on hybrid devices (touch laptops,
-   tablets with a pointer), so capability checks alone are not enough.
-   Coarse / non-hovering devices react to an explicit click or tap only.
+   including targets added later. Sound is a desktop-mouse affordance
+   only: the central eligibility gate below requires the PRIMARY input
+   to be a hover-capable fine pointer and the device to report no touch
+   capability. Phones, tablets, touchscreens and touch laptops
+   therefore never construct, preload, trigger or play any Audio — the
+   effect returns before any listener is attached. On eligible devices
+   hover sound is still restricted to REAL mouse hovers: the event
+   itself must not be derived from touch input, as defense in depth
+   for devices that synthesize compatibility pointerover events
+   (pointerType "mouse") from touch scrolls/taps.
    The browser only allows audio playback after a user gesture, so the
    first pointerdown anywhere silently warms both Audio elements up
    (volume 0) — after that, hovers/clicks can sound. */
@@ -21,9 +24,11 @@ const HOVER_SOUND_SRC = "/sfx/click-sound.m4a";
 const ENTER_SOUND_SRC = "/sfx/click-enter.m4a";
 const HOVER_TARGET_SELECTOR = 'a[href], button:not(:disabled), [data-hover-sound]';
 const CLICK_TARGET_SELECTOR = "a[href], button:not(:disabled)";
-/* Hover sounds exist only where hover is a real, fine-pointer
-   capability (desktop mouse). Coarse-pointer / non-hovering devices
-   (tablet, mobile) must react to an explicit click or tap only. */
+/* The one central sound-eligibility rule, capability-based (never
+   viewport width): the PRIMARY input must be a hover-capable fine
+   pointer (desktop mouse / trackpad), and touch capability must be
+   absent entirely so mobile, tablet and touchscreen hardware
+   (touch laptops included) stay silent. */
 const FINE_POINTER_QUERY = "(hover: hover) and (pointer: fine)";
 /* After a touch ends, browsers may still synthesize a compatibility
    mouseover (tap-hover emulation). This window swallows those so a tap
@@ -35,9 +40,15 @@ export default function SoundEffects() {
   const lastClickAtRef = useRef(0);
 
   useEffect(() => {
+    const finePointer = window.matchMedia(FINE_POINTER_QUERY);
+    /* Central eligibility gate. Ineligible devices — phones, tablets,
+       touchscreens, touch laptops, coarse or non-hovering pointers —
+       return here: no Audio element is constructed, nothing is
+       preloaded, no listener is attached, so no sound can ever play. */
+    if (!finePointer.matches || navigator.maxTouchPoints > 0) return;
+
     let hoverAudio: HTMLAudioElement | null = null;
     let enterAudio: HTMLAudioElement | null = null;
-    const finePointer = window.matchMedia(FINE_POINTER_QUERY);
     /* Touch interaction state: set while fingers are down (a scroll or
        drag is in flight) and stamped on touch end so hover-eligible
        pointerover events can be rejected when they were actually
