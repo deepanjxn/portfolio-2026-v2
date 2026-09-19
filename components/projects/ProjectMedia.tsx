@@ -1,9 +1,17 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import type { Project } from "@/data/projects";
 import styles from "./ProjectMedia.module.css";
 
 const DEFAULT_ASPECT_RATIO = "16 / 10";
+
+/* Cards further than this from the viewport keep their video source
+   detached; crossing the threshold attaches the existing <source> and
+   the browser then loads and autoplays the video natively. */
+const VIDEO_ROOT_MARGIN = "200px 0px";
 
 /* MIME type for the card's local video sources, derived from the file
    extension so both .webm and .mp4 sources can be referenced. */
@@ -14,6 +22,30 @@ function videoMime(src: string): string {
 }
 
 export default function ProjectMedia({ project }: { project: Project }) {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+  const isVideo = project.mediaType === "video" && Boolean(project.videoSrc);
+
+  /* The video element and its native poster render from the start; only
+     the source waits for the observer. The observer disconnects on the
+     first intersection, so re-renders never create another one and
+     scrolling away never unloads the source. */
+  useEffect(() => {
+    if (!isVideo || shouldLoadVideo) return;
+    const video = videoRef.current;
+    if (!video) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setShouldLoadVideo(true);
+        }
+      },
+      { rootMargin: VIDEO_ROOT_MARGIN, threshold: 0 },
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, [isVideo, shouldLoadVideo]);
+
   /* Custom property rather than an inline aspect-ratio so a stylesheet
      media query can override it on mobile (inline styles always win). */
   const ratioStyle = {
@@ -70,6 +102,7 @@ export default function ProjectMedia({ project }: { project: Project }) {
           style={mediaRatioStyle}
         >
           <video
+            ref={videoRef}
             className={styles.video}
             poster={project.poster}
             preload="none"
@@ -79,7 +112,12 @@ export default function ProjectMedia({ project }: { project: Project }) {
             playsInline
             aria-hidden="true"
           >
-            <source src={project.videoSrc} type={videoMime(project.videoSrc)} />
+            {shouldLoadVideo && (
+              <source
+                src={project.videoSrc}
+                type={videoMime(project.videoSrc)}
+              />
+            )}
           </video>
         </div>
       </div>

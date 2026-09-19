@@ -79,15 +79,15 @@ export const projects: Project[] = [
   {
     /* Fourth Study card, directly after Paperclip. Same preview
        treatment as the other authored studies: the gallery-6 identity
-       animation (16:9 webm) inside the shared inset frame, with its
-       still as the poster. */
+       animation (16:9 webm) inside the shared inset frame, with
+       reevv-poster.webp as the poster. */
     id: "p02c",
     slug: "reevv-research",
     title: "Reevv Research",
     category: "studies",
     mediaType: "video",
     videoSrc: "/studies/reevv/gallery-6.webm",
-    poster: "/studies/reevv/gallery-6.webp",
+    poster: "/studies/reevv/reevv-poster.webp",
     alt: "Reevv brand identity and business card mockup",
     aspectRatio: "3 / 2",
     mediaAspectRatio: "16 / 9",
