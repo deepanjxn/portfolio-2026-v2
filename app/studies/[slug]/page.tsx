@@ -98,7 +98,23 @@ function StudyBlockView({
       <div className={styles.text} data-reveal style={revealStyle}>
         {block.paragraphs.map((paragraph, index) => (
           <p key={index} className="type-p1">
-            {paragraph}
+            {typeof paragraph === "string"
+              ? paragraph
+              : paragraph.map((run, runIndex) =>
+                  typeof run === "string" ? (
+                    run
+                  ) : (
+                    <a
+                      key={runIndex}
+                      className={styles.textLink}
+                      href={run.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {run.text}
+                    </a>
+                  ),
+                )}
           </p>
         ))}
         {block.link ? (

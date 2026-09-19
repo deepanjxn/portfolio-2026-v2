@@ -30,10 +30,15 @@ export interface StudyMedia {
   cover?: boolean;
 }
 
+/* A paragraph is plain text, or a sequence of text runs where an
+   individual run may be an inline link (accent blue, opens in a new
+   tab). */
+export type StudyTextRun = string | { text: string; href: string };
+
 export type StudyBlock =
   | {
       type: "text";
-      paragraphs: string[];
+      paragraphs: Array<string | StudyTextRun[]>;
       /* Optional inline action link rendered on its own line below the
          paragraphs (opens in a new tab). */
       link?: { label: string; href: string };
@@ -503,12 +508,17 @@ export const studies: Study[] = [
           "I wanted Paperclip to take care of as much of that work as possible, without making the experience feel automated or impersonal.",
         ],
       },
-      /* Visual placeholder for the traditional listing process
-         collapsing into the snap-to-list experience. */
-      { type: "media" },
+      /* Visual — survey results. */
+      {
+        type: "media",
+        media: {
+          src: "/studies/paperclip/paperclip-1.1.webp",
+          alt: "Survey results from 100 participants showing what people expected from Paperclip",
+        },
+      },
 
       /* Scene 3 — understanding the resale experience. Competitive
-         journey research and survey results as ONE cluster. */
+         analysis. */
       {
         type: "text",
         paragraphs: [
@@ -519,22 +529,56 @@ export const studies: Study[] = [
       {
         type: "media-cluster",
         layout: "stack",
-        items: [{}, {}],
+        items: [
+          {
+            src: "/studies/paperclip/paperclip-3.webp",
+            alt: "Paperclip competitive analysis comparing Paperclip, Depop, Vinted, Shpock, and WhatNot, with key findings",
+          },
+        ],
       },
 
-      /* Scene 4 — finding the patterns. Affinity map and persona /
-         empathy map as ONE cluster. */
+      /* Scene 4 — finding the patterns. Persona image and empathy map,
+         the paragraph about the picture it gave the team, then the
+         affinity maps. */
       {
         type: "text",
         paragraphs: [
           "Once the responses started coming in, I grouped them into recurring themes instead of treating every comment as a separate problem.",
+        ],
+      },
+      {
+        type: "media-cluster",
+        layout: "stack",
+        items: [
+          {
+            src: "/studies/paperclip/paperclip-2.webp",
+            alt: "Paperclip research persona Charlotte: goals and needs, frustrations, behavior insights, and her own words",
+          },
+          {
+            src: "/studies/paperclip/paperclip-6.webp",
+            alt: "Paperclip empathy map for the persona: what she does, thinks, says, and feels about reselling",
+          },
+        ],
+      },
+      {
+        type: "text",
+        paragraphs: [
           "That gave me a clearer picture of what people actually needed, and a persona built from the research gave the team something concrete to design around. It became much easier to ask, “Would this actually make selling easier for them?”",
         ],
       },
       {
         type: "media-cluster",
         layout: "stack",
-        items: [{}, {}],
+        items: [
+          {
+            src: "/studies/paperclip/paperclip-4.webp",
+            alt: "Paperclip affinity map linking user quotes about simplicity, speed, and visual trust to derived insights and design opportunities",
+          },
+          {
+            src: "/studies/paperclip/paperclip-5.webp",
+            alt: "Paperclip affinity map linking user quotes about communication, fees, and platform feel to derived insights and design opportunities",
+          },
+        ],
       },
 
       /* Scene 5 — removing the unnecessary steps. User flow and early
@@ -549,50 +593,120 @@ export const studies: Study[] = [
       {
         type: "media-cluster",
         layout: "stack",
-        items: [{}, {}],
+        items: [
+          {
+            src: "/studies/paperclip/paperclip-7.webp",
+            alt: "Low-fidelity Paperclip wireframes covering the listing flow, from capturing photos to publishing an item",
+          },
+          {
+            src: "/studies/paperclip/paperclip-8.webp",
+            alt: "Low-fidelity Paperclip wireframes covering item details, offers, and supporting app flows",
+          },
+        ],
       },
 
-      /* Scene 6 — turning the flow into a product. Wireframes,
-         components, high fidelity, and the final screens / design
-         system as ONE four-item cluster. */
+      /* Scene 6 — turning the flow into a product. Showcase video, then
+         the design-system note, followed by the remaining visuals as
+         ONE cluster. */
       {
         type: "text",
         paragraphs: [
           "Once the core flow felt right, I moved into high fidelity and started building the design system alongside it.",
+        ],
+      },
+      {
+        type: "media",
+        media: {
+          src: "/studies/paperclip/paperclip-showcase.webm",
+          alt: "Paperclip Pro retail SaaS showcase: dashboard, inventory, and storefront screens",
+        },
+      },
+      {
+        type: "media",
+        media: {
+          src: "/studies/paperclip/paperclip-11.webp",
+          alt: "Paperclip design system components: button states, product cards, category pickers, pickup points, and referral cards",
+        },
+      },
+      {
+        type: "text",
+        paragraphs: [
           "Shared components, typography, spacing, and interaction patterns gave Paperclip a consistent foundation and made it easier to keep moving quickly as the product grew.",
         ],
       },
       {
         type: "media-cluster",
         layout: "stack",
-        items: [{}, {}, {}, {}],
+        items: [
+          {
+            src: "/studies/paperclip/paperclip-9.webp",
+            alt: "Paperclip high-fidelity screens covering onboarding, photo capture, listing details, pricing, and tracking",
+          },
+          {
+            src: "/studies/paperclip/paperclip-10.webp",
+            alt: "Paperclip high-fidelity screens covering shipping, pricing, AI try-on, product pages, and address entry",
+          },
+        ],
       },
 
-      /* Scene 7 — the result. Primary outcome / demo and supporting
-         testimonials / outcome feedback as ONE cluster, followed at the
-         major section rhythm by the closing visual. */
+      /* Scene 7 — the result. Demo video and the outcome paragraph,
+         then the ratings & reviews visual. */
       {
         type: "text",
         paragraphs: [
           "The biggest change was how little work the seller had to do.",
           "AI-assisted listing reduced the time it took to create a listing by 85%, and every participant in usability testing completed the listing-to-shipping flow without getting stuck.",
-          "When the app launched, it reached a 4.9-star rating on the App Store, but the feedback I found most interesting was much simpler: people just felt like selling something wasn't such a chore anymore.",
         ],
       },
       {
         type: "media-cluster",
         layout: "stack",
-        items: [{}, {}],
+        items: [
+          {
+            vimeo: "1228309328",
+            alt: "listing-with-ai",
+            cover: true,
+          },
+        ],
       },
-      /* Closing visual placeholder. */
-      { type: "media" },
+      {
+        type: "text",
+        paragraphs: [
+          "When the app launched, it reached a 4.9-star rating on the App Store, but the feedback I found most interesting was much simpler: people just felt like selling something wasn't such a chore anymore.",
+        ],
+      },
+      /* Outcome feedback — ratings & reviews. */
+      {
+        type: "media",
+        media: {
+          src: "/studies/paperclip/paperclip-14.webp",
+          alt: "Paperclip App Store ratings and reviews: 4.9 out of 5 from 12.4K ratings, with three customer reviews",
+        },
+      },
 
-      /* Conceptual closing line. */
+      /* Closing line, then the team credit with the inline link. */
       {
         type: "text",
         paragraphs: [
           "Selling something should be as easy as taking a photo of it.",
+          [
+            "I worked closely with ",
+            {
+              text: "Even Walser",
+              href: "https://uk.linkedin.com/in/evenwalser",
+            },
+            ", Alex, Luke, and Petr throughout the product, and with Sophie on iOS to translate the designs into a cohesive Swift experience. Seeing the work move from early ideas and prototypes into a real product was one of the most rewarding parts of building Paperclip together.",
+          ],
         ],
+      },
+      /* Final media element — closing Vimeo embed. */
+      {
+        type: "media",
+        media: {
+          vimeo: "1228310895",
+          alt: "paperclip-final",
+          cover: true,
+        },
       },
     ],
   },
