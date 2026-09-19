@@ -62,11 +62,35 @@ export default function ProjectMedia({ project }: { project: Project }) {
   /* Real media renders inside the frame's inset area (see module css);
      cards without an asset render the bare frame as before. */
   if (project.mediaType === "image" && project.thumbnail) {
+    /* Visuals fill the whole 16:10 placeholder: the cover image is
+       clipped by the card's own overflow + 12px radius, and native lazy
+       loading keeps the gray placeholder visible until it is ready. */
+    if (project.category === "visuals") {
+      return (
+        <div
+          className={styles.media}
+          data-radius-surface
+          data-visual
+          style={ratioStyle}
+        >
+          <Image
+            className={styles.cover}
+            src={project.thumbnail}
+            alt={project.alt ?? project.title}
+            fill
+            sizes="(min-width: 1280px) 50vw, 100vw"
+            loading="lazy"
+          />
+        </div>
+      );
+    }
+
     return (
       <div
         className={styles.media}
         data-radius-surface
         data-square-mobile={project.category === "studies" || undefined}
+        data-desktop-4x3
         style={ratioStyle}
       >
         <div
@@ -93,6 +117,7 @@ export default function ProjectMedia({ project }: { project: Project }) {
         className={styles.media}
         data-radius-surface
         data-square-mobile={project.category === "studies" || undefined}
+        data-desktop-4x3
         style={ratioStyle}
       >
         <div
@@ -129,6 +154,7 @@ export default function ProjectMedia({ project }: { project: Project }) {
       className={styles.media}
       data-radius-surface
       data-square-mobile={project.category === "studies" || undefined}
+      data-desktop-4x3
       style={ratioStyle}
       aria-hidden="true"
     />

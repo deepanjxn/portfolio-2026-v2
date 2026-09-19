@@ -30,6 +30,31 @@ export const CATEGORY_LABELS: Record<ProjectCategory, string> = {
   explainers: "Explainers",
 };
 
+/* The Visuals collection: every image under public/images/
+   (deepanjan-visuals-1.png … -91.png). The files share one shape, so
+   the entries are generated from the numeric filename range rather than
+   written out by hand — all 91 are represented in order, with no
+   duplicates. */
+const VISUAL_COUNT = 91;
+
+const visualProjects: Project[] = Array.from(
+  { length: VISUAL_COUNT },
+  (_, index): Project => {
+    const number = index + 1;
+    const suffix = String(number).padStart(2, "0");
+    const label = `Visual ${suffix}`;
+    return {
+      id: `v${suffix}`,
+      slug: `visual-${number}`,
+      title: label,
+      category: "visuals",
+      mediaType: "image",
+      thumbnail: `/images/deepanjan-visuals-${number}.png`,
+      alt: label,
+    };
+  },
+);
+
 export const projects: Project[] = [
   {
     id: "p01",
@@ -118,27 +143,7 @@ export const projects: Project[] = [
     mediaType: "image",
     aspectRatio: "3 / 2",
   },
-  {
-    id: "p06",
-    slug: "visual-identity-exploration",
-    title: "Visual identity exploration",
-    category: "visuals",
-    mediaType: "image",
-  },
-  {
-    id: "p07",
-    slug: "campaign-stills",
-    title: "Campaign stills — product launch",
-    category: "visuals",
-    mediaType: "image",
-  },
-  {
-    id: "p08",
-    slug: "poster-series",
-    title: "Poster series — design principles",
-    category: "visuals",
-    mediaType: "image",
-  },
+  ...visualProjects,
   {
     id: "p09",
     slug: "explainer-how-it-works",
