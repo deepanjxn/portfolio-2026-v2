@@ -649,12 +649,27 @@ export const studies: Study[] = [
         ],
       },
 
-      /* Scene 7 — the result. Demo video and the outcome paragraph,
-         then the ratings & reviews visual. */
+      /* Scene 7 — the result. Opener paragraph, the Paperclip UI demo,
+         the listing demo, then the outcome paragraph and the ratings
+         & reviews visual. */
       {
         type: "text",
         paragraphs: [
           "The biggest change was how little work the seller had to do.",
+        ],
+      },
+      /* Vimeo — Paperclip UI. */
+      {
+        type: "media",
+        media: {
+          vimeo: "1085654499",
+          alt: "Paperclip UI",
+          cover: true,
+        },
+      },
+      {
+        type: "text",
+        paragraphs: [
           "AI-assisted listing reduced the time it took to create a listing by 85%, and every participant in usability testing completed the listing-to-shipping flow without getting stuck.",
         ],
       },
@@ -707,6 +722,190 @@ export const studies: Study[] = [
           alt: "paperclip-final",
           cover: true,
         },
+      },
+    ],
+  },
+  {
+    slug: "reevv-research",
+    title: "Designing the system behind Reevv Research",
+    description:
+      "Building a visual language that could move seamlessly between Reevv's products, interfaces, presentations, and marketing.",
+    blocks: [
+      /* Scene 1 hero — the Reevv wordmark. */
+      {
+        type: "media",
+        media: {
+          src: "/studies/reevv/gallery-1.webp",
+          alt: "Reevv wordmark and logo mark on a purple gradient background",
+        },
+      },
+
+      /* Scene 1 — the opener. */
+      {
+        type: "text",
+        paragraphs: [
+          "In September 2024, I spent eight weeks building the visual identity and brand system for Reevv, an AI-native operating company. The work covered everything from the core identity to how it could stretch across the products Reevv was building.",
+        ],
+      },
+
+      /* Scene 2 — the challenge. */
+      {
+        type: "text",
+        paragraphs: [
+          "Reevv wasn't building just one product. It was building an operating system for solo operators, a realty automation tool, a fact-checking product, and more. The challenge was creating one identity that could connect all of them without making everything look the same.",
+        ],
+      },
+      /* reevv-identiy.webm — identity motion piece (local video: muted,
+         autoplay, loop, plays inline via the shared StudyMedia
+         implementation). */
+      {
+        type: "media",
+        media: {
+          src: "/studies/reevv/reevv-identiy.webm",
+          alt: "Reevv identity animation",
+        },
+      },
+
+      /* Scene 3 — getting the direction right. */
+      {
+        type: "text",
+        paragraphs: [
+          "Before opening Figma, I spent time with Joshua Jack and Christian Reyes, the co-founders, talking through what they wanted Reevv to feel like and where they wanted the company to go. That conversation gave me a much clearer direction before I started exploring the visual side.",
+        ],
+      },
+
+      /* Scene 4 — finding the visual language. */
+      {
+        type: "text",
+        paragraphs: [
+          "I started by looking at how AI companies were presenting themselves and, more importantly, where Reevv could feel different. I explored a range of typography, symbols, layouts, and logo directions before narrowing things down.",
+        ],
+      },
+      /* reevv-comp.webp — the reference landscape of AI company marks. */
+      {
+        type: "media",
+        media: {
+          src: "/studies/reevv/reevv-comp.webp",
+          alt: "Grid of AI company logos reviewed as reference for Reevv's visual direction",
+        },
+      },
+      {
+        type: "text",
+        paragraphs: [
+          "The logo went through quite a few iterations. With each round, I stripped a little more away until it became something simple enough to recognize, but flexible enough to work across a product, a presentation, or a business card.",
+        ],
+      },
+      /* Logo iterations as one 16px cluster: reevv-sketch-2 (top),
+         reevv-sketch-1 (bottom). */
+      {
+        type: "media-cluster",
+        layout: "stack",
+        items: [
+          {
+            src: "/studies/reevv/reevv-sketch-2.webp",
+            alt: "Notebook pages of early Reevv logo and letterform explorations",
+          },
+          {
+            src: "/studies/reevv/reevv-sketch-1.webp",
+            alt: "Reevv logo sketches: pencil mark explorations beside the geometric construction grid of the final R mark",
+          },
+        ],
+      },
+      {
+        type: "text",
+        paragraphs: [
+          "After several rounds of exploration, we landed on this direction and refined it to feel more focused, distinctive, and aligned with Reevv's positioning.",
+        ],
+      },
+      /* Mark and wordmark construction as one 16px cluster: gallery-3
+         (top), gallery-4 (bottom). */
+      {
+        type: "media-cluster",
+        layout: "stack",
+        items: [
+          {
+            src: "/studies/reevv/gallery-3.webp",
+            alt: "Reevv R mark beside its blue geometric construction grid",
+          },
+          {
+            src: "/studies/reevv/gallery-4.webp",
+            alt: "Reevv wordmark construction: hatched letterforms with alignment points on black",
+          },
+        ],
+      },
+      /* Scene 5 — typography & colour. */
+      {
+        type: "text",
+        paragraphs: [
+          "Typography became a big part of the identity. I wanted something that felt technical and precise, but still had enough character to work outside of the product.",
+          "The colour palette stayed intentionally small too. Keeping it restrained made the system easier to recognize and gave each product enough room to have its own personality without drifting away from Reevv.",
+        ],
+      },
+      /* Typography and colour specimens as one 16px cluster: gallery-8
+         (top), gallery-10 (bottom). */
+      {
+        type: "media-cluster",
+        layout: "stack",
+        items: [
+          {
+            src: "/studies/reevv/gallery-8.png",
+            alt: "Reevv typography specimen: Neue Montreal grotesque typeface in Light, Regular, and Medium styles",
+          },
+          {
+            src: "/studies/reevv/gallery-10.png",
+            alt: "Reevv colour palette: Reevv Black, Reevv Purple #7861FF, Reevv Off-White, and Reevv Gray with HEX, RGB, and HSL values",
+          },
+        ],
+      },
+
+      /* Scene 6 — turning it into a system. */
+      {
+        type: "text",
+        paragraphs: [
+          "Once the visual direction was established, I started turning it into a system — typography, spacing, colour, components, and the smaller rules that keep everything consistent.",
+          "I then applied it across product interfaces, presentations, and marketing materials to make sure it worked beyond the brand itself.",
+        ],
+      },
+      /* Applied system as one 16px cluster: gallery-6, gallery-5,
+         gallery-7, gallery-12, gallery-11, gallery-9. */
+      {
+        type: "media-cluster",
+        layout: "stack",
+        items: [
+          {
+            src: "/studies/reevv/gallery-6.webp",
+            alt: "Reevv business card mockup: black card with the Reevv wordmark and 'Connecting Experiences' on a purple background",
+          },
+          {
+            src: "/studies/reevv/gallery-5.webp",
+            alt: "Reevv social media post designs for 2024 and Web 3 protocols on a purple background",
+          },
+          {
+            src: "/studies/reevv/gallery-7.webp",
+            alt: "Reevv merchandise mockups: black t-shirt and tote bag with the Reevv wordmark",
+          },
+          {
+            src: "/studies/reevv/gallery-12.webp",
+            alt: "Reevv app icon: black rounded square with the white R mark and a purple notification badge",
+          },
+          {
+            src: "/studies/reevv/gallery-11.webp",
+            alt: "Reevv social profile mockup on X showing the brand mark, 'Connecting Experiences', and follower count",
+          },
+          {
+            src: "/studies/reevv/gallery-9.webp",
+            alt: "Reevv out-of-home poster series: purple and black panels with the Reevv wordmark and campaign lines",
+          },
+        ],
+      },
+
+      /* Scene 7 — bringing it all together. */
+      {
+        type: "text",
+        paragraphs: [
+          "The identity now extends across Reevv, giving everything the company builds a shared visual language while leaving room for it to evolve.",
+          "Different products, but one recognisable system tying them together.",
+        ],
       },
     ],
   },

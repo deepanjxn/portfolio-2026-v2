@@ -97,5 +97,5 @@ export const aboutColumns: AboutListColumn[] = [
 ];
 
 export const cursorMediaSource: CursorMediaSource = {
-  videoSrc: "/videos/deepanjan-sen-about.webm",
+  videoSrc: "/videos/deepanjan-sen-product-designer-about.webm",
 };
